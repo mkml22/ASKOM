@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Askom</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #f3f4f6;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+
+    .sidebar h1 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .content h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .product-card p {
+      color: #0070f3;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <img src="gambar/ARTHA22.jpg" alt="Logo Toko">
+    <h1>Artha_Sejahtera</h1>
+  </div>
+
+  <div class="content">
+    <h2>Produk Kami</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="gambar/download.jpg" alt="Kaos Polos">
+        <h3>(Advan Soulmate)
+          Intel Celeron N4020-
+Ram 4 GB-
+          SSD 128-
+          Layar 14 Inc
+        </h3>
+        <p>Rp 2.500.000</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/300x200?text=Jaket+Hoodie" alt="Jaket Hoodie">
+        <h3>Jaket Hoodie</h3>
+        <p>Rp 150.000</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/300x200?text=Jaket+Hoodie" alt="Jaket Hoodie">
+        <h3>Jaket Hoodie</h3>
+        <p>Rp 150.000</p>
+      </div>
+      <div class="product-card">
+        <img src="https://via.placeholder.com/300x200?text=Jaket+Hoodie" alt="Jaket Hoodie">
+        <h3>Jaket Hoodie</h3>
+        <p>Rp 150.000</p>
+      </div>
+      <div class="product-card">
+        <img src="gambar/download (1).jpg" alt="Sneakers">
+        <h3>Axioo Hype 1</h3>
+        <p>Rp 2.700.000</p>
+        </div>
+         <div class="product-card">
+        <img src="gambar/axx.jpg" alt="Sneakers">
+        <h3>Axioo Hype 3</h3>
+        <p>Rp 4.500.000</p>
+        </div>
+    
+    </div>
+  </div>
+
+</body>
+</html>
