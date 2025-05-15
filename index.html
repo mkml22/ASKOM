@@ -114,6 +114,7 @@
   </div>
 
   <div class="content">
+    <div class="content"><input type="text" id="searchInput" placeholder="🔍Cari barang..." style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;">
     <div class="product-grid">
       <div class="product-card">
         <img src="gambar/download.jpg" alt="Kaos Polos">
@@ -240,6 +241,21 @@ Ram 4 GB |
     </div>
   </div>
   <script>
+    // Fitur pencarian barang
+document.getElementById("searchInput").addEventListener("input", function () {
+  const searchValue = this.value.toLowerCase();
+  const cards = document.querySelectorAll(".product-card");
+
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(searchValue)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+});
+
   // Animasi masuk setiap kartu produk
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".product-card");
