@@ -56,14 +56,15 @@
 
   <script>
     function login() {
-      const email = document.getElementById('email').value;
-      if (email && email.includes('@')) {
-        localStorage.setItem('email', email); // Simpan email saat login
-        window.location.href = 'index_protected.html';
-      } else {
-        alert('Masukkan email yang valid.');
-      }
-    }
+  const email = document.getElementById('email').value;
+  if (email && email.includes('@')) {
+    localStorage.setItem('email', email);         // ✅ Simpan email
+    localStorage.setItem('isLoggedIn', 'true');   // ✅ Tandai sudah login
+    window.location.href = 'index_protected.html';
+  } else {
+    alert('Masukkan email yang valid.');
+  }
+}
 
     if (localStorage.getItem('isLoggedIn') === 'true') {
       window.location.href = 'index_protected.html';
