@@ -58,7 +58,7 @@
     function login() {
       const email = document.getElementById('email').value;
       if (email && email.includes('@')) {
-        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('email', email); // Simpan email saat login
         window.location.href = 'index_protected.html';
       } else {
         alert('Masukkan email yang valid.');
