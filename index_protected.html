@@ -399,6 +399,20 @@ document.getElementById("searchInput").addEventListener("input", function () {
   </div>
 
 </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const email = localStorage.getItem("email");
+    if (email) {
+      const footer = document.querySelector("footer");
+      const emailDiv = document.createElement("div");
+      emailDiv.style.marginTop = "15px";
+      emailDiv.style.fontSize = "14px";
+      emailDiv.style.color = "#555";
+      emailDiv.innerHTML = `<strong>Email login:</strong> ${email}`;
+      footer.appendChild(emailDiv);
+    }
+  });
+</script>
 
 </body>
 </html>
