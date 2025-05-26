@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    .login-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #0070f3;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005bb5;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Masuk ke Askom</h2>
+    <input type="email" id="email" placeholder="Masukkan email" required>
+    <br>
+    <button onclick="login()">Masuk</button>
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById('email').value;
+      if (email && email.includes('@')) {
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = 'index_protected.html';
+      } else {
+        alert('Masukkan email yang valid.');
+      }
+    }
+
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+      window.location.href = 'index_protected.html';
+    }
+  </script>
+</body>
+</html>
