@@ -55,16 +55,19 @@
   </div>
 
   <script>
-    function login() {
-  const email = document.getElementById('email').value;
-  if (email && email.includes('@')) {
-    localStorage.setItem('email', email);         // ✅ Simpan email
-    localStorage.setItem('isLoggedIn', 'true');   // ✅ Tandai sudah login
+  function login() {
+  const email = document.getElementById('email').value.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (emailPattern.test(email)) {
+    localStorage.setItem('email', email);
+    localStorage.setItem('isLoggedIn', 'true');
     window.location.href = 'index_protected.html';
   } else {
-    alert('Masukkan email yang valid.');
+    alert('Masukkan email yang valid (contoh: nama@email.com).');
   }
 }
+
 
     if (localStorage.getItem('isLoggedIn') === 'true') {
       window.location.href = 'index_protected.html';
