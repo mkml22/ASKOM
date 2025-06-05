@@ -109,13 +109,29 @@
       font-weight: bold;
     }
   
+.glow-text {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowGlow 6s ease infinite;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+@keyframes rainbowGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 </style>
 </head>
 <body>
   <div class="sidebar">
     <img alt="Logo Toko" src="gambar/ARTHA22.jpg"/>
-    <h2>Artha_Sejahtera_Komputindo</h2>
+    <h2 class="glow-text">Artha_Sejahtera_Komputindo</h2>
   </div>
 
   <div class="content">
