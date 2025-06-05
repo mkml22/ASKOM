@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="utf-8"/>
@@ -108,12 +108,30 @@
       color: #0070f3;
       font-weight: bold;
     }
-  </style>
+  
+.glow-text {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowGlow 6s ease infinite;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+@keyframes rainbowGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+</style>
 </head>
 <body>
   <div class="sidebar">
     <img alt="Logo Toko" src="gambar/ARTHA22.jpg"/>
-    <h2>Artha_Sejahtera</h2>
+    <h2 class="glow-text">Artha_Sejahtera_Komputindo</h2>
   </div>
 
   <div class="content">
@@ -340,7 +358,7 @@ Ram 4 GB |
         </h3>
         <p>Rp 9.600.000</p>
       </div>
-      <div class="product-card">
+       <div class="product-card">
         <img alt="Sneakers" src="gambar/11.jpg"/>
         <h3>(Asus Vivobook M1405YA-VIPS751M)
           Amd Ryzen 7-7730U | Ram 16 GB DDR 4 | SSD 512 | Layar 14 Inc
@@ -382,6 +400,15 @@ Ram 4 GB |
         </h3>
         <p>Rp 11.500.000</p>
       </div>
+       <div class="product-card">
+        <img alt="Sneakers" src="gambar/17.jpg"/>
+        <h3>(Acer Aspire A14-51M-7058)
+          Intel Core 7-150U | Ram 16 GB LPDDR 5 | SSD 512 | Layar 14 Inc
+        </h3>
+        <p>Rp 11.500.000</p>
+      </div>
+
+
 
     </div>
   </div>
