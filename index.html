@@ -108,8 +108,8 @@
       color: #0070f3;
       font-weight: bold;
     }
-  
-.glow-text {
+ 
+    .glow-text {
   font-size: 24px;
   font-weight: bold;
   background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
@@ -126,17 +126,23 @@
   100% { background-position: 0% 50%; }
 }
 
-</style>
+  </style>
 </head>
 <body>
   <div class="sidebar">
     <img alt="Logo Toko" src="gambar/ARTHA22.jpg"/>
-    <h2 class="glow-text">Artha_Sejahtera_Komputindo</h2>
+   <h2 class="glow-text">Artha_Sejahtera_Komputindo</h2>
   </div>
 
   <div class="content">
     <div class="controls">
       <input id="searchInput" placeholder="Cari barang..." style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;" type="text"/>
+      <select id="categoryFilter">
+    <option value="all">Semua Kategori</option>
+    <option value="laptop">Laptop</option>
+    <option value="printer">Printer</option>
+    <option value="aksesoris">Aksesoris</option>
+  </select>
       <select id="sortPrice">
         <option value="default">Urutkan Harga</option>
         <option value="asc">Harga Terendah</option>
@@ -146,7 +152,7 @@
 
     <div class="product-grid" id="productGrid">
       <!-- Semua kartu produk tetap di sini -->
-                    <div class="product-card">
+                    <div class="product-card" data-category="laptop">
         <img alt="Kaos Polos" src="gambar/download.jpg"/>
         <h3>(Advan Soulmate)
           Intel Celeron N4020 | 
@@ -156,284 +162,305 @@ Ram 4 GB |
         </h3>
         <p>Rp 2.500.000</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Jaket Hoodie" src="gambar/download (1).jpg"/>
         <h3>(Axioo Hype 1)
           Intel Celeron N4020 | Ram 4 GB | SSD 128 | Layar 14 Inc
         </h3>
         <p>Rp 2.650.000</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Jaket Hoodie" src="gambar/download (1).jpg"/>
         <h3>(Axioo Hype 1)
           Intel Celeron N4020 | Ram 8 GB DDR 4 | SSD 128 + 256 | Layar 14 Inc</h3>
         <p>Rp 3.200.000</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Jaket Hoodie" src="gambar/download (1).jpg"/>
         <h3>(Axioo Hype 1)
           Intel Celeron N4020 | Ram 8 GB DDR 4| SSD 128 + 512| Layar 14 Inc
         </h3>
         <p>Rp 3.500.000</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/axx.jpg"/>
         <h3>(Axioo Hype 3)
           Intel Core I3-1005G1 | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 4.300.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/Mybook-Hype-5.jpg"/>
         <h3>(Axioo Hype 5)
           AMD Ryzen 5-3500U | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 4.500.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/lnv.jpg"/>
         <h3>(Lenovo Ideapad 1)
           Intel Celeron N4020 | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 4.600.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/acer as.jpg"/>
         <h3>(Acer Aspire Lite AL14-31P-C6DD)
           Intel N100 | Ram 8 GB DDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 5.000.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/asus viveb.jpg"/>
         <h3>(Asus Vivobook A1400KA-FHD426)
           Intel Celeron N4500 | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 5.000.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/asus viveb.jpg"/>
         <h3>(Asus Vivobook A1400KA-FHD4512)
           Intel Celeron N4500 | Ram 8 GB DDR 4 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 5.200.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/lolipop.jpg"/>
         <h3>(Axioo Hype 5 AMD X5-2 Lollipop)
           AMD Ryzen 5-7430U | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 5.700.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/axioo x-5.jpg"/>
         <h3>(Axioo Hype 5)
           Intel Core I5-1235U | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 5.750.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/hp 14.jpg"/>
         <h3>(HP 14-EP0890TU)
           Intel Core I3-N305 | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 5.800.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/lnv c v14.jpg"/>
         <h3>(Lenovo Commercial V14 G IAP-NEID)
           Intel Core I3-1215U | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 5.900.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/asus v g014 i3.jpg"/>
         <h3>(Asus Vivobook GO 14 E1404GA-FHD321M)
           Intel Core I3-N305 | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 6.000.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/ASUS R.jpg"/>
         <h3>(Asus Vivobook GO 14 E1404GA-FHD321M)
           AMD Ryzen 3-7320U | Ram 8 GB DDR 5 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 6.000.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/cr1.jpg"/>
         <h3>(Acer Aspire Lite AL1-14M-RSID)
          Intel Core I3-1215U | Ram 8 GB DDR 4 | SSD 256 | Layar 14 Inc
         </h3>
         <p>Rp 6.000.000</p>
         </div>
-          <div class="product-card">
+          <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/acer go 14.jpg"/>
         <h3>(Acer Aspire Go 14)
           Intel Core I3-N305 | Ram 8 GB DDR 5 | SSD 512 | Layar 14 Inc Wuxga
         </h3>
         <p>Rp 6.000.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/axioo x-5.jpg"/>
         <h3>(Axioo Hype 5)
          Intel Core I5-1235U | Ram 16 GB DDR 4 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 6.200.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/ACR ASPR.jpg"/>
         <h3>(Acer Aspire Lite AL-15-41P-R72B)
           AMD Ryzen 7-5700U | Ram 8 GB DDR 4 | SSD 512 | Layar 15 Inc
         </h3>
         <p>Rp 7.200.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/1.jpg"/>
         <h3>(Asus Vivobook Go 14 E1404FA-VIPS558M)
           AMD Ryzen 5-7520U | Ram 8 GB LPDDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 8.000.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/2.jpg"/>
         <h3>(Lenovo Ideapad Slime 3 14ABR8-7BID)
           AMD Ryzen 5-7530U | Ram 8 GB DDR 4 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 8.000.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/3.jpg"/>
         <h3>(Axioo Hype 7 Amd X8)
           AMD Ryzen 7-6800U | Ram 16 GB DDR 5 | SSD 512 | Layar 15 Inc
         </h3>
         <p>Rp 8.200.000</p>
         </div>
-         <div class="product-card">
+         <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/4.jpg"/>
         <h3>(Acer Aspire Lite AL14-52M-59TF)
           Intel Core I5-1334U | Ram 16 GB DDR 5 | SSD 512 | Layar 15 Inc
         </h3>
         <p>Rp 8.300.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/5.jpg"/>
         <h3>(Acer Aspire Go Spin AGSP14-31PT-386W)
           Intel Core 3-N355 | Ram 8 GB LPDDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 8.500.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/6.jpg"/>
         <h3>(Advan Workplus R7 T-16S5)
           Amd Ryzen 7-7735HS | Ram 16 GB DDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 8.600.000</p>
         </div>
-        <div class="product-card">
+        <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/7.jpg"/>
         <h3>(HP 14-EM0168AU)
           Amd Ryzen 7-7730U | Ram 16 GB DDR 4 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 9.000.000</p>
         </div>
-          <div class="product-card">
+          <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/8.jpg"/>
         <h3>(Advan AI Gen L24A-R78S1)
           Amd Ryzen 7-8845HS | Ram 16 GB LPDDR 5X | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 9.500.000</p>
         </div>
-          <div class="product-card">
+          <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/9.jpg"/>
         <h3>(Lenovo Ideapad Slime 3 14ABR8 6HID)
           Amd Ryzen 7-7730U | Ram 16 GB DDR 4 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 9.600.000</p>
         </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/10.jpg"/>
         <h3>(Axioo Pongo 725)
           Intel core I7-12650H | Ram 16 GB DDR 4 | SSD 512 | Layar 15.6 Inc
         </h3>
         <p>Rp 9.600.000</p>
       </div>
-       <div class="product-card">
+       <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/11.jpg"/>
         <h3>(Asus Vivobook M1405YA-VIPS751M)
           Amd Ryzen 7-7730U | Ram 16 GB DDR 4 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 9.800.000</p>
       </div>
-       <div class="product-card">
+       <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/12.jpg"/>
         <h3>(Acer Aspire 14 A14-51M-7278)
           Intel core 7-150U | Ram 8 GB LPDDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 10.300.000</p>
       </div>
-       <div class="product-card">
+       <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/13.jpg"/>
         <h3>(Asus Vivobook 15 A1504VAP-VIPS5504M)
           Intel core 5-120U | Ram 16 GB DDR 4 | SSD 512 | Layar 15.6 Inc
         </h3>
         <p>Rp 10.300.000</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/14.jpg"/>
         <h3>(HP Pavilion Plus 14-EY0016AU)
           Amd Ryzen 5-7540 | Ram 16 GB LPDDR 5X | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 10.800.000</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/15.jpg"/>
         <h3>(Asus Tuf Gaming A15 FA506NFR-R725B1T-OM)
           Amd Ryzen 7-7435HS | Ram 8 GB DDR 5 | SSD 512 | Layar 15.6 Inc
         </h3>
         <p>Rp 11.000.000</p>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/16.jpg"/>
         <h3>(Apple Macbook Air 13 MGN63ID)
           Apple M1 8C | Ram 8 GB | SSD 256 | Layar 13.3 Inc
         </h3>
         <p>Rp 11.500.000</p>
       </div>
-       <div class="product-card">
+       <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/17.jpg"/>
         <h3>(Acer Aspire A14-51M-7058)
           Intel Core 7-150U | Ram 16 GB LPDDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 11.500.000</p>
       </div>
-         <div class="product-card">
+       <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/21.jpg"/>
         <h3>(Acer Nitro V 15 ANV15-51-57YF)
           Intel Core I5-13420U | Ram 8 GB DDR 5 | SSD 512 | Nvidia Geforce RTX3050 6 GB | Layar 15.6 Inc
         </h3>
         <p>Rp 11.500.000</p>
       </div>
-          <div class="product-card">
+          <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/18.jpg"/>
         <h3>(Lenovo Ideapad Slim 3 14IRH10-3MID)
           Intel Core I7-13620H | Ram 16 GB DDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 11.600.000</p>
       </div>
-          <div class="product-card">
+          <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/19.jpg"/>
         <h3>(Acer Aspire Spin ASP14-51MTN-59EF)
           Intel Core 5-120U | Ram 16 GB LPDDR 5 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 11.800.000</p>
       </div>
-       <div class="product-card">
+       <div class="product-card" data-category="laptop">
         <img alt="Sneakers" src="gambar/20.jpg"/>
         <h3>(HP Pavilion X360 14EK2111TU Touch)
           Intel Core 5-120U | Ram 16 GB DDR 4 | SSD 512 | Layar 14 Inc
         </h3>
         <p>Rp 12.000.000</p>
+      </div>
+       <div class="product-card" data-category="printer">
+        <img alt="Sneakers" src="gambar/p1.jpg"/>
+        <h3>(Epson L121)
+         Only Print |
+        </h3>
+        <p>Rp 1.700.000</p>
+      </div>
+             <div class="product-card" data-category="printer">
+        <img alt="Sneakers" src="gambar/p2.jpg"/>
+        <h3>(Epson L3210)
+         Print & Copy | Scan | Kertas A4
+        </h3>
+        <p>Rp 2.350.000</p>
+      </div>
+         <div class="product-card" data-category="printer">
+        <img alt="Sneakers" src="gambar/p3.jpg"/>
+        <h3>(Epson L5290)
+         Print & Copy | Scan | Kertas A4-F4 | Wi-fi
+        </h3>
+        <p>Rp 5.600.000</p>
       </div>
 
 
@@ -456,22 +483,32 @@ Ram 4 GB |
       cards.forEach(card => productGrid.appendChild(card));
     }
 
-    function filterAndSort() {
-      const keyword = searchInput.value.toLowerCase();
-      let filtered = originalCards.filter(card => card.textContent.toLowerCase().includes(keyword));
+   function filterAndSort() {
+  const keyword = searchInput.value.toLowerCase();
+  const selectedCategory = document.getElementById("categoryFilter").value;
 
-      const sort = sortSelect.value;
-      if (sort === "asc") {
-        filtered.sort((a, b) => cleanPrice(a.querySelector("p").textContent) - cleanPrice(b.querySelector("p").textContent));
-      } else if (sort === "desc") {
-        filtered.sort((a, b) => cleanPrice(b.querySelector("p").textContent) - cleanPrice(a.querySelector("p").textContent));
-      }
+  let filtered = originalCards.filter(card => {
+    const matchesKeyword = card.textContent.toLowerCase().includes(keyword);
+    const matchesCategory = selectedCategory === "all" || card.dataset.category === selectedCategory;
+    return matchesKeyword && matchesCategory;
+  });
 
-      renderCards(filtered);
-    }
+  const sort = sortSelect.value;
+  if (sort === "asc") {
+    filtered.sort((a, b) => cleanPrice(a.querySelector("p").textContent) - cleanPrice(b.querySelector("p").textContent));
+  } else if (sort === "desc") {
+    filtered.sort((a, b) => cleanPrice(b.querySelector("p").textContent) - cleanPrice(a.querySelector("p").textContent));
+  }
+
+  renderCards(filtered);
+}
+
 
     searchInput.addEventListener("input", filterAndSort);
     sortSelect.addEventListener("change", filterAndSort);
+
+    document.getElementById("categoryFilter").addEventListener("change", filterAndSort);
+
 
     document.addEventListener("DOMContentLoaded", () => {
       originalCards.forEach(card => productGrid.appendChild(card));
@@ -493,7 +530,9 @@ Ram 4 GB |
     <p><strong>Alamat Toko:</strong><br/>
     Simpang Empat Banua Lima, Palampitan Hilir, Kec. Amuntai Tengah,<br/>
     Kabupaten Hulu Sungai Utara, Kalimantan Selatan 71414</p>
-      <p><strong>Catatan:</strong><br/>
+
+
+     <p><strong>Catatan:</strong><br/>
     Untuk harga laptop masih bisa nego<br/></p>
 
     <div style="margin-top: 15px;">
