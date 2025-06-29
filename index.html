@@ -5,6 +5,30 @@
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <title>Askom</title>
   <style>
+    /* Efek hover lebih menarik pada product card */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.05) rotate(0.5deg);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background-color: #f0f8ff; /* warna latar belakang lembut saat hover */
+}
+
+/* Efek getar saat diklik */
+.product-card:active {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0px); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0px); }
+}
+
     .product-card {
       transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
