@@ -546,12 +546,15 @@ function renderPagination(totalItems, perPage, pageNow) {
   for (let i = 1; i <= pageCount; i++) {
     const btn = document.createElement("button");
     btn.textContent = i;
-    btn.style.margin = "0 5px";
-    btn.style.padding = "8px 12px";
-    btn.style.border = i === pageNow ? "2px solid #0070f3" : "1px solid #ccc";
-btn.style.backgroundColor = i === pageNow ? "#e0f0ff" : "#fff";
+btn.style.margin = "0 5px";
+btn.style.padding = "8px 12px";
+btn.style.border = i === currentPage ? "2px solid #0070f3" : "1px solid #ccc";
+btn.style.backgroundColor = i === currentPage ? "#e0f0ff" : "#fff";
+btn.style.color = "#000"; // pastikan teksnya terlihat
+btn.style.cursor = "pointer";
+btn.style.borderRadius = "12px";
+btn.style.fontWeight = "bold";
 
-    btn.style.cursor = "pointer";
     btn.onclick = () => {
       currentPage = i;
       filterAndSort();
