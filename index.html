@@ -150,6 +150,7 @@
   100% { background-position: 0% 50%; }
 }
 
+
   </style>
 </head>
 <body>
@@ -173,6 +174,8 @@
         <option value="desc">Harga Tertinggi</option>
       </select>
     </div>
+    <div id="pagination" style="text-align:center; margin-top:20px;"></div>
+
 
     <div class="product-grid" id="productGrid">
       <!-- Semua kartu produk tetap di sini -->
@@ -507,7 +510,9 @@ Ram 4 GB |
         </h3>
         <p>Rp 3.000.000</p>
       </div>
- 
+
+
+
 
 
 
@@ -516,22 +521,55 @@ Ram 4 GB |
 
   <script>
     const searchInput = document.getElementById("searchInput");
-    const sortSelect = document.getElementById("sortPrice");
-    const productGrid = document.getElementById("productGrid");
-    const originalCards = Array.from(document.querySelectorAll(".product-card"));
+const sortSelect = document.getElementById("sortPrice");
+const productGrid = document.getElementById("productGrid");
+const pagination = document.getElementById("pagination");
+const categoryFilter = document.getElementById("categoryFilter");
 
-    function cleanPrice(priceText) {
-      return parseInt(priceText.replace(/[^0-9]/g, ""), 10);
-    }
+const originalCards = Array.from(document.querySelectorAll(".product-card"));
+let currentPage = 1;
+const itemsPerPage = 30;
 
-    function renderCards(cards) {
-      productGrid.innerHTML = "";
-      cards.forEach(card => productGrid.appendChild(card));
-    }
+function cleanPrice(priceText) {
+  return parseInt(priceText.replace(/[^0-9]/g, ""), 10);
+}
 
-   function filterAndSort() {
+function paginate(items, page = 1, perPage = 30) {
+  const start = (page - 1) * perPage;
+  return items.slice(start, start + perPage);
+}
+
+function renderPagination(totalItems, perPage, pageNow) {
+
+  const pageCount = Math.ceil(totalItems / perPage);
+  pagination.innerHTML = "";
+  for (let i = 1; i <= pageCount; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+    btn.style.margin = "0 5px";
+    btn.style.padding = "8px 12px";
+    btn.style.border = i === pageNow ? "2px solid #0070f3" : "1px solid #ccc";
+btn.style.backgroundColor = i === pageNow ? "#e0f0ff" : "#fff";
+
+    btn.style.cursor = "pointer";
+    btn.onclick = () => {
+      currentPage = i;
+      filterAndSort();
+    };
+    pagination.appendChild(btn);
+  }
+}
+
+function renderCards(cards) {
+  productGrid.innerHTML = "";
+  paginate(cards, currentPage, itemsPerPage).forEach(card => productGrid.appendChild(card));
+  animateCards();
+  renderPagination(cards.length, itemsPerPage, currentPage);
+}
+
+function filterAndSort() {
   const keyword = searchInput.value.toLowerCase();
-  const selectedCategory = document.getElementById("categoryFilter").value;
+  const selectedCategory = categoryFilter.value;
 
   let filtered = originalCards.filter(card => {
     const matchesKeyword = card.textContent.toLowerCase().includes(keyword);
@@ -549,29 +587,38 @@ Ram 4 GB |
   renderCards(filtered);
 }
 
+function animateCards() {
+  const cards = document.querySelectorAll(".product-card");
+  cards.forEach((card, index) => {
+    card.style.opacity = 0;
+    card.style.transform = "scale(0.8)";
+    setTimeout(() => {
+      card.style.transition = "all 0.5s ease";
+      card.style.opacity = 1;
+      card.style.transform = "scale(1)";
+    }, index * 50);
+  });
+}
 
-    searchInput.addEventListener("input", filterAndSort);
-    sortSelect.addEventListener("change", filterAndSort);
+searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  filterAndSort();
+});
+sortSelect.addEventListener("change", () => {
+  currentPage = 1;
+  filterAndSort();
+});
+categoryFilter.addEventListener("change", () => {
+  currentPage = 1;
+  filterAndSort();
+});
 
-    document.getElementById("categoryFilter").addEventListener("change", filterAndSort);
+document.addEventListener("DOMContentLoaded", () => {
+  currentPage = 1; // langsung buka halaman ke-1
+  filterAndSort();
+});
 
-
-    document.addEventListener("DOMContentLoaded", () => {
-      originalCards.forEach(card => productGrid.appendChild(card));
-
-      const cards = document.querySelectorAll(".product-card");
-      cards.forEach((card, index) => {
-        card.style.opacity = 0;
-        card.style.transform = "translateY(20px)";
-        setTimeout(() => {
-          card.style.transition = "all 0.5s ease";
-          card.style.opacity = 1;
-          card.style.transform = "translateY(0)";
-        }, index * 100);
-      });
-    });
   </script>
-
   <footer style="text-align: center; padding: 20px; background-color: #fff; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); margin-top: 30px;">
     <p><strong>Alamat Toko:</strong><br/>
     Simpang Empat Banua Lima, Palampitan Hilir, Kec. Amuntai Tengah,<br/>
@@ -579,7 +626,7 @@ Ram 4 GB |
 
 
      <p><strong>Catatan:</strong><br/>
-    UNTUK HARGA LAPTOP & PRINTER MASIH BISA NEGO<br/></p>
+    Untuk harga laptop masih bisa nego<br/></p>
 
     <div style="margin-top: 15px;">
       <iframe allowfullscreen height="200" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
