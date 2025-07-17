@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Askom</title>
+<meta name="description" content="Toko laptop, printer, dan aksesoris resmi di Hulu Sungai Utara. Artha Sejahtera Komputindo menyediakan produk berkualitas dengan harga bersaing.">
+<style>
+ 
+#scrollTopBtn {
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  z-index: 99;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 12px 16px;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+#scrollTopBtn:hover {
+  background-color: #0056b3;
+}
+
+
+    /* Efek hover lebih menarik pada product card */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.05) rotate(0.5deg);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background-color: #f0f8ff; /* warna latar belakang lembut saat hover */
+}
+
+/* Efek getar saat diklik */
+.product-card:active {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0px); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0px); }
+}
+
+    .product-card {
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #f3f4f6;
+      flex-direction: column;
+    }
+
+    .sidebar {
+      width: 100%;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .sidebar img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    .content h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .controls select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .product-card p {
+      color: #0070f3;
+      font-weight: bold;
+    }
+ 
+    .glow-text {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowGlow 6s ease infinite;
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+}
+
+@keyframes rainbowGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+  </style>
+</head>
+<body>
+<div class="sidebar">
+<img alt="Logo Toko" src="gambar/ARTHA22.jpg"/>
+<h2 class="glow-text">Artha_Sejahtera_Komputindo</h2>
+</div>
+<div class="content">
+<div class="controls">
+<input id="searchInput" placeholder="Cari barang..." style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;" type="text"/>
+<select id="categoryFilter">
+<option value="all">Semua Kategori</option>
+<option value="laptop">Laptop</option>
+<option value="printer">Printer</option>
+<option value="aksesoris">Aksesoris</option>
+</select><select id="brandFilter"><option value="all">Semua Merek</option><option value="asus">Asus</option><option value="acer">Acer</option><option value="hp">Hp</option><option value="lenovo">Lenovo</option><option value="msi">Msi</option><option value="apple">Apple</option><option value="axioo">Axioo</option><option value="advan">Advan</option><option value="epson">Epson</option><option value="canon">Canon</option><option value="brother">Brother</option></select>
+<select id="sortPrice">
+<option value="default">Urutkan Harga</option>
+<option value="asc">Harga Terendah</option>
+<option value="desc">Harga Tertinggi</option>
+</select>
+</div>
+<div id="pagination" style="text-align:center; margin-top:20px;"></div>
+<div class="product-grid" id="productGrid">
+
+<!-- Semua kartu produk tetap di sini -->
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Ja" src="foto/asus1.jpg"/>
+<h3>E210KA-HD4413M (INTEL CELERON N4500/8GB DDR4/128GB EMMC/INTEL UHD GRAPHICS/11.6 INCH HD/CAMERA/NUMPAD/WI-FI 5/BLUETOOTH 4.2/WIN11+OHS/RESMI)</h3>
+<p>Rp 4.000.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Jaket Hoodie" src="foto/asus2.jpg"/>
+<h3>E410KA-FHD42 (INTEL CELERON N4500/8GB DDR4/256GB M.2 NVME PCIE SSD/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA/BACKLIT KEYBOARD WHITE/NUMPAD/WI-FI 5/BT 5.1/WIN11+OHS 2021/RESMI) 
+</h3>
+<p>Rp 4.800.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Jaket Hoodie" src="foto/asus2.jpg"/>
+<h3>E410KA-FHD45 (INTEL CELERON N4500/8GB DDR4/512GB SSD M.2 NVME/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA/BACKLIT KEYBOARD WHITE/NUMPAD/WI-FI 5/BLUETOOTH 4.1/WIN11+OHS 2021/RESMI)
+</h3>
+<p>Rp 5.200.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Jaket Hoodie" src="foto/asus3.jpg"/>
+<h3>E1404GA-FHD32 (INTEL I3-N305/8GB DDR4/256GB M.2 NVME PCIE SSD/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/FINGERPRINT
+  /CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS 2021/RESMI)
+</h3>
+<p>Rp 6.000.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Jaket Hoodie" src="foto/asus4.jpg"/>
+<h3>E1404GA-FHD35 (INTEL I3-N305/8GB DDR4/512GB SSD M.2 NVME/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/FINGERPRINT
+  /CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS 2021/RESMI)
+</h3>
+<p>Rp 6.200.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Jaket Hoodie" src="foto/asus5.jpg"/>
+<h3>E1404GA-FHD3851M/52M/53M (INTEL I3-N305/8GB DDR4/512GB SSD M.2 NVME/INTEL UHD GRAPHICS/14 INCH FHD 60Hz/ANTI GLARE/BACKLIT KEYBOARD WHITE/FINGERPRINT/
+  CAMERA/BLUETOOTH 5.3/WIFI 6E/WIN11+OHS 2024+M365/RESMI)
+</h3>
+<p>Rp 6.300.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Jaket Hoodie" src="foto/asus6.jpg"/>
+<h3>A1404VA-FHD3821M/22M/23M (INTEL CORE I3-1315U/8GB DDR4/256GB M.2 NVME PCIE SSD/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/BT 5.3/WIFI 6E/WIN11+OHS 2024+M365/RESMI)
+</h3>
+<p>Rp 6.700.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+<img alt="Jaket Hoodie" src="foto/asus7.jpg"/>
+<h3>A1404VA-VIPS3851M (INTEL CORE I3-1315U/8GB DDR4/512GB M.2 NVME PCIE SSD/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT
+  /BLUETOOTH 5.3/WIFI 6E/WIN11+OHS+M365
+  /RESMI)
+</h3>
+<p>Rp 7.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="X1404ZA-I38128" src="foto/asus9.jpg"/>
+  <h3>X1404ZA-I38128 (INTEL CORE I3-1215U/8GB DDR4/512GB SSD M.2 NVME/INTEL UHD GRAPHICS/14INCH FHD/CAMERA/NUMPAD/WI-FI 6E/BLUETOOTH 5.3
+  /W11/DISTRI2)</h3>
+  <p>Rp 6.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="E1404FA-FHD32" src="foto/asus10.jpg"/>
+  <h3>E1404FA-FHD32 (AMD RYZEN 3-7320U/8GB LPDDR5/256GB SSD M.2 NVME/AMD RADEON GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/FINGERPRINT
+  /CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.000.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="E1404FA-FHD35" src="foto/asus11.jpg"/>
+  <h3>E1404FA-FHD35 (AMD RYZEN 3-7320U/8GB LPDDR5/512GB SSD M.2 NVME/AMD RADEON GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/FINGERPRINT
+  /CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="E1504FA-OLED351M" src="foto/asus12.jpg"/>
+  <h3>E1504FA-OLED351M (AMD RYZEN 3-7320U/8GB LPDDR5/512GB SSD M.2 NVME/AMD RADEON GRAPHICS/15.6 INCH FHD OLED 60HZ/BACKLIT KEYBOARD WHITE/FINGERPRINT
+  /CAMERA/BLUETOOTH 5.3/WIFI 6E/WIN11+OHS 2021+M365/RESMI)</h3>
+  <p>Rp 7.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="E1504FA-VIPS3152M" src="foto/asus13.jpg"/>
+  <h3>E1504FA-VIPS3152M (AMD RYZEN 3-7320U/16GB LPDDR5/512GB SSD M.2 NVME/AMD RADEON GRAPHICS/15.6 INCH FHD IPS/BACKLIT KEYBOARD WHITE/FINGERPRINT
+  /CAMERA/BLUETOOTH 5.3/WIFI 6E/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 7.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="A1404VA-VIPS55" src="foto/asus14.jpg"/>
+  <h3>A1404VA-VIPS55 (INTEL CORE I5-1335U/8GB DDR4/512GB M.2 NVME PCIE SSD/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA
+    /FINGERPRINT
+  /WI-FI 6/BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 8.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="A1405VA-VIPS5151M" src="foto/asus15.png"/>
+  <h3>A1405VA-VIPS5151M (INTEL CORE I5-13420H/16GB DDR4/512GB SSD M.2 NVME/INTEL UHD GRAPHICS/14 INCH WUXGA VIPS/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6/BLUETOOTH 5.3/WIN11+OHS 2024/RESMI)</h3>
+  <p>Rp 9.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="16X K3605VC-I535B6T-HM" src="foto/asus16.jpg"/>
+  <h3>16X K3605VC-I535B6T-HM (INTEL CORE I5-13420H/16GB DDR4/512GB SSD M.2 NVME/NVIDIA GEFORCE RTX3050 4GB/16 INCH WUXGA IPS 144HZ/CAMERA/BACKLIT KEYBOARD/BLUETOOTH 5.3/WIFI 6E/WIN11+OHS 2024+M365/RESMI)</h3>
+  <p>Rp 11.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="V16 V3607VJ-I535B8T-HM" src="foto/asus17.jpg"/>
+  <h3>V16 V3607VJ-I535B8T-HM (INTEL CORE 5 210H/16GB DDR5/512GB SSD M.2 NVME/NVIDIA GEFORCE RTX3050 6GB/16 INCH WUXGA 144HZ/RGB BACKLIT KEYBOARD/CAMERA/BT 5.3/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 13.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="S14 S3407CA-VIPS511" src="foto/asus18.jpg"/>
+  <h3>S14 S3407CA-VIPS511 (INTEL CORE ULTRA 5-225H/16GB LPDDR5X/1TB M.2 NVME PCIE SSD/INTEL GRAPHICS/14 INCH WUXGA IPS/BACKLIT KEYBOARD WHITE/WIFI 6/BLUETOOTH 5.3/WIN11+OHS/RESMI)</h3>
+  <p>Rp 13.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="E1404FA-VIPS55 (R5-7520U 8GB)" src="foto/asus19.jpg"/>
+  <h3>E1404FA-VIPS55 (AMD RYZEN 5-7520U/8GB LPDDR5/512GB M.2 NVME PCIE SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6/BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 7.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="E1404FA-VIPS55 (R5-7520U 16GB)" src="foto/asus20.jpg"/>
+  <h3>E1404FA-VIPS55 (AMD RYZEN 5-7520U/16GB LPDDR5/512GB M.2 NVME PCIE SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS 60HZ/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6/BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 8.200.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="TN3402YA-VIPS557" src="foto/asus21.jpg"/>
+  <h3>TN3402YA-VIPS557 (AMD RYZEN 5-7430U/16GB DDR4/512GB SSD M.2 NVME/AMD RADEON GRAPHICS/14 INCH WUXGA IPS/CAMERA/BACKLIT KEY WHITE/FP/FLIP360
+  /TOUCHSCREEN/WI-FI 6E/BT 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 11.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="M1407KA-VIPS5152M" src="foto/asus22.jpg"/>
+  <h3>M1407KA-VIPS5152M (AMD RYZEN AI 5 340/16GB DDR5/512GB M.2 NVME PCIE SSD/AMD RADEON GRAPHICS/14 INCH IPS WUXGA/CAMERA/BACKLIT KEYBOARD WHITE/WI-FI 6/BT 5.3/WIN11+OHS 2024/RESMI)</h3>
+  <p>Rp 11.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="A1504VAP-VIPS7104M TOUCH" src="foto/asus23.jpg"/>
+  <h3>A1504VAP-VIPS7104M TOUCH (INTEL CORE 7 150U/16GB DDR4/1TB M.2 NVME PCIE SSD/INTEL GRAPHICS/15.6 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6/BLUETOOTH 5.2/WIN11+OHS 2021+M365/RESMI)</h3>
+  <p>Rp 12.950.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="A1404VA-VIPS7852M" src="foto/asus24.jpg"/>
+  <h3>A1404VA-VIPS7852M (INTEL CORE I7-1355U/8GB DDR4/512GB M.2 NVME PCIE SSD/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6E/BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 10.600.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="A1404VA-VIPS7153M/52M/51M" src="foto/asus25.png"/>
+  <h3>A1404VA-VIPS7153M/52M/51M (INTEL CORE I7-1355U/16GB DDR4/512GB M.2 NVME PCIE SSD/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAM/BACKLIT KEY WHITE/FINGERPRINT/WI-FI 6E/BT 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 11.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="A1404VA-VIPS711" src="foto/asus26.jpg"/>
+  <h3>A1404VA-VIPS711 (INTEL CORE I7-1355U/16GB DDR4/1TB SSD M.2 NVME/INTEL IRIS XE GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6/BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 11.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="S14 OLED S5406MA-OLED714" src="foto/asus27.jpg"/>
+  <h3>S14 OLED S5406MA-OLED714 (INTEL CORE ULTRA 7 155H/16GB LPDDR5X/1TB M.2 NVME PCIE SSD/INTEL ARC GRAPHICS/14 INCH WUXGA 60HZ/BACKLIT KEYBOARD/WIFI 6E/BLUETOOTH 5.3/WIN11+OHS/RESMI)</h3>
+  <p>Rp 15.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="S14 S3407CA-VIPS7111M" src="foto/asus28.jpg"/>
+  <h3>S14 S3407CA-VIPS7111M (INTEL CORE ULTRA 7-255H/16GB DDR5/1TB M.2 NVME PCIE SSD/INTEL GRAPHICS/14 INCH WUXGA IPS/BACKLIT KEYBOARD WHITE/WIFI 6/BLUETOOTH 5.3/WIN11+OHS/RESMI)</h3>
+  <p>Rp 15.250.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="M1405YA-VIPS75" src="foto/asus29.jpg"/>
+  <h3>M1405YA-VIPS75 (AMD RYZEN 7-7730U/16GB DDR4/512GB SSD M.2 NVME/AMD RADEON GRAPHICS/14 INCH WUXGA/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6/BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 9.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="M1405YA-OLEDS711" src="foto/asus30.jpg"/>
+  <h3>M1405YA-OLEDS711 (AMD RYZEN 7-7730U/16GB DDR4/1TB SSD M.2 NVME/AMD RADEON GRAPHICS/14 INCH 2.8K OLED 90HZ/CAMERA/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6E/BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 11.700.000</p>
+</div>
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="S14 M3407HA-VIPS7111M" src="foto/asus31.jpg"/>
+  <h3>S14 M3407HA-VIPS7111M (AMD RYZEN 7-260/16GB DDR5/1TB SSD M.2 NVME/AMD RADEON GRAPHICS/14 INCH WUXGA IPS/CAMERA/BACKLIT KEYBOARD WHITE/WI-FI 6/BLUETOOTH 5.3/WIN11+OHS/RESMI)</h3>
+  <p>Rp 13.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="S15 S5507QA-OLEDSP11M" src="foto/asus32.jpg"/>
+  <h3>S15 S5507QA-OLEDSP11M (SNAPDRAGON X PLUS X1P 42/100/16GB LPDDR5X/1TB M.2 NVME PCIE SSD/QUALCOMM ADRENO/15.6 INCH 3K OLED 120HZ/CAMERA/BACKLIT KEYBOARD/WI-FI 7/BLUETOOTH 5.4/WIN11+OHS/RESMI)</h3>
+  <p>Rp 15.250.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="ZENBOOK DUO UX8406MA-OLEDS711" src="foto/asus33.jpg"/>
+  <h3>ZENBOOK DUO UX8406MA-OLEDS711 (INTEL CORE ULTRA 7-155H/16GB LPDDR5X/1TB M.2 NVME PCIE SSD/INTEL ARC GRAPHICS/14 INCH 3K OLED 120HZ/TOUCHSCREEN
+  /WIFI 6E/BLUETOOTH 5.3/WIN11+OHS/RESMI)</h3>
+  <p>Rp 24.600.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="TUF 15 FA506NFR-R725B1T-OM" src="foto/asus34.jpg"/>
+  <h3>TUF 15 FA506NFR-R725B1T-OM (AMD RYZEN 7-7435HS/8GB DDR5/512GB PCIE NVME M.2 SSD/NVIDIA GEFORCE RTX2050 4GB/15.6 INCH FHD IPS 144HZ/CAM/BACKLIT KEY RGB/WI-FI 6/BLUETOOTH 5.3/WIN11+OHS21/RESMI)</h3>
+  <p>Rp 9.750.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="TUF FX507ZC4-I535B1M-OM 8GB" src="foto/asus35.jpg"/>
+  <h3>TUF FX507ZC4-I535B1M-OM (INTEL CORE I5-12500H/8GB DDR4/512GB SSD M.2 NVME/NVIDIA GEFORCE RTX3050 4GB/15.6 INCH FHD 144HZ/ANTI GLARE/RGB BACKLIT KEY/CAM/BT 5.2/WIFI 6/WIN11+OHS 2021+MICROSOFT 365/RESMI)</h3>
+  <p>Rp 10.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="TUF FX507ZC4-I535B1M-OM 16GB" src="foto/asus36.jpg"/>
+  <h3>TUF FX507ZC4-I535B1M-OM (INTEL CORE I5-12500H/16GB DDR4/512GB SSD M.2 NVME/NVIDIA GEFORCE RTX3050 4GB/15.6 INCH FHD 144HZ/ANTI GLARE/RGB BACKLIT KEY/CAM/BT 5.2/WIFI 6/WIN11+OHS 2021+MICROSOFT 365/RESMI)</h3>
+  <p>Rp 11.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="TUF A15 FA506NCR-R735B1T-OM" src="foto/asus37.jpg"/>
+  <h3>TUF A15 FA506NCR-R735B1T-OM (AMD RYZEN 7-7435HS/8GB DDR5/512GB PCIE NVME M.2 SSD/NVIDIA GEFORCE RTX3050 4GB/15.6 INCH FHD IPS 144HZ/CAMERA/BACKLIT KEY RGB/WI-FI 6/BT 5.3/WIN11+OHS21/RESMI)</h3>
+  <p>Rp 11.600.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="TUF A15 FA507NUR-R745K6G-OM" src="foto/asus38.jpg"/>
+  <h3>TUF A15 FA507NUR-R745K6G-OM (AMD RYZEN 7-7435HS/16GB DDR5/512GB PCIE NVME M2 SSD/NVIDIA GEFORCE RTX 4050 6GB/15.6 INCH FHD IPS 144HZ/ANTI GLARE/CAMERA/
+    BACKLIT KEY RGB/WI-FI 6/BT 5.3/WIN11+OHS+M365/
+  RESMI)</h3>
+  <p>Rp 16.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="TUF FX607VU-I745J6M-HM" src="foto/asus39.jpg"/>
+  <h3>TUF FX607VU-I745J6M-HM (INTEL CORE I7-13620H/16GB DDR5/512GB PCIE NVME M.2 SSD/NVIDIA GEFORCE RTX 4050 6GB/16 INCH WUXGA IPS 165HZ 100% SRGB/BACKLIT KEY RGB/CAM/WI-FI 6/BT 5.3/WIN11+OHS/RESMI)</h3>
+  <p>Rp 19.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="asus">
+  <img alt="ROG STRIX G16 G614JU-I545J6G-HM" src="foto/asus40.jpg"/>
+  <h3>ROG STRIX G16 G614JU-I545J6G-HM (INTEL CORE I5-13540HX/16GB DDR5/512GB SSD NVME/NVIDIA GEFORCE RTX4050 6GB/16 INCH WUXGA 165HZ/BACKLIT KEYBOARD/WI-FI 6/BLUETOOTH 5.2/WIN11+OHS/RESMI)</h3>
+  <p>Rp 19.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="LITE AL14-31P-C6AA" src="foto/acer1.jpg"/>
+  <h3>LITE AL14-31P-C6AA (INTEL PROCESSOR N100/8GB DDR5/256GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 5/BLUETOOTH 5.0/W11+OHS 2024/RESMI)</h3>
+  <p>Rp 5.000.000</p>
+</div>
+    
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL14-31P-C0G4/C6DD" src="foto/acer2.jpg"/>
+  <h3>AL14-31P-C0G4/C6DD (INTEL PROCESSOR N100/8GB DDR5/512GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 5/BLUETOOTH 5.0/W11+OHS 2021/RESMI)</h3>
+  <p>Rp 5.200.000</p>
+</div>
+    
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL14-32P-C2SS" src="foto/acer3.jpg"/>
+  <h3>AL14-32P-C2SS (INTEL PROCESSOR N150/8GB DDR5/256GB PCIE NVME SSD/INTEL GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 6/BLUETOOTH 5.0/W11+OHS 2024+M365/RESMI)</h3>
+  <p>Rp 5.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AGSP14-31PT-386W" src="foto/acer4.jpg"/>
+  <h3>AGSP14-31PT-386W (INTEL CORE 3-N355/8GB LPDDR5/512GB PCIE NVME SSD/INTEL GRAPHICS/14 INCH WUXGA IPS/CAMERA
+  /TOUCHSCREEN/FLIP 360/WI-FI 6/BLUETOOTH 5.1/WIN11+OHS21/RESMI)</h3>
+  <p>Rp 8.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="ASPIRE 14 A14-51M" src="foto/acer5.jpg"/>
+  <h3>ASPIRE 14 A14-51M (INTEL CORE 3-100U/8GB LPDDR5/512GB PCIE NVME SSD/INTEL GRAPHICS/14 INCH WUXGA IPS/BACKLIT KEYBOARD WHITE/CAMERA/WI-FI 6E/BLUETOOTH 5.2/WIN11+OHS 2021
+  /RESMI)</h3>
+  <p>Rp 7.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AG14-31P-34GM" src="foto/acer6.jpg"/>
+  <h3>AG14-31P-34GM (INTEL CORE I3-N305/8GB LPDDR5/256GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA TN/CAMERA/WI-FI 6/BLUETOOTH 5.0/WIN11+OHS/RESMI)</h3>
+  <p>Rp 5.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL1 14-14M-RBID/RSID" src="foto/acer7.jpg"/>
+  <h3>AL1 14-14M-RBID/RSID (INTEL CORE I3-1215U/8GB DDR4/256GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 5/BLUETOOTH 5.1/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL1-14M-3BID" src="foto/acer8.jpg"/>
+  <h3>AL1-14M-3BID (INTEL CORE I3-1215U/8GB DDR4/512GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 5/BLUETOOTH 5.1/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="LITE 14 AL1-14M-3NID" src="foto/acer9.jpg"/>
+  <h3>LITE 14 AL1-14M-3NID (INTEL CORE I3-1215U/8GB DDR4/512GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 5/BLUETOOTH 5.1/WIN11+OHS2024
+  /RESMI)</h3>
+  <p>Rp 6.250.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL1-14M-3MID" src="foto/acer10.jpg"/>
+  <h3>AL1-14M-3MID (INTEL CORE I3-1215U/8GB DDR4/512GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/BACKLIT KEYBOARD/WI-FI 5/BLUETOOTH 5.1/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AG14-21P-R499" src="foto/acer11.jpg"/>
+  <h3>AG14-21P-R499 (AMD RYZEN 3-7320U/8GB LPDDR5/512GB PCIE NVME SSD/AMD RADEON GRAPHICS/14 INCH WUXGA/CAMERA/WI-FI 6/BLUETOOTH 5.0/W11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.350.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL14-52M-59TF" src="foto/acer12.jpg"/>
+  <h3>AL14-52M-59TF (INTEL CORE I5-1334U/16GB DDR5/512GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 6/BLUETOOTH 5.1/WIN11+OHS/RESMI)</h3>
+  <p>Rp 8.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="ASP14-51MTN-59EF" src="foto/acer13.jpg"/>
+  <h3>ASP14-51MTN-59EF (INTEL CORE 5-120U/16GB LPDDR5/512GB PCIE NVME SSD/INTEL GRAPHICS/14 WUXGA IPS/CAMERA/TOUCHSCREEN/FLIP360/BACKLIT KEYBOARD WHITE/FINGERPRINT/WI-FI 6E/BLUETOOTH 5.3/WIN11+OHS/RESMI)</h3>
+  <p>Rp 11.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="ASPIRE A14-51M" src="foto/acer14.jpg"/>
+  <h3>ASPIRE A14-51M (INTEL CORE 5-120U/16GB LPDDR5/512GB PCIE NVME SSD/INTEL GRAPHICS/14 INCH WUXGA IPS/BACKLIT KEYBOARD WHITE
+  /CAMERA/BLUETOOTH 5.2/WIFI 6E/W11+OHS 2021/RESMI)</h3>
+  <p>Rp 9.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="SWIFT GO 14 AI SFG14-73-5135" src="foto/acer15.jpg"/>
+  <h3>SWIFT GO 14 AI SFG14-73-5135 (INTEL CORE ULTRA 5-125H/16GB LPDDR5X/512GB PCIE NVME SSD/INTEL ARC GRAPHICS/14 INCH 2.8K IPS/FINGERPRINT
+    /BACKLIT KEYBOARD WHITE
+  /CAMERA/BLUETOOTH 5.3/WIFI 6E/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 11.450.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="A314-23M-R8QA" src="foto/acer16.jpg"/>
+  <h3>A314-23M-R8QA (AMD RYZEN 5-7520U/4GB LPDDR5/512GB SSD SATA/AMD RADEON GRAPHICS/14 INCH HD/CAMERA/WI-FI 6/BLUETOOTH 5.0/DOS/DISTRI1)</h3>
+  <p>Rp 6.250.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="ASPIRE 14 A14-51M-7278" src="foto/acer17.jpg"/>
+  <h3>ASPIRE 14 A14-51M-7278 (INTEL CORE 7 150U/8GB LPDDR5/512GB PCIE NVME SSD/INTEL GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 6E/BLUETOOTH 5.2/DOS/DISTRI1)</h3>
+  <p>Rp 10.150.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL14-71M-71E2" src="foto/acer18.jpg"/>
+  <h3>AL14-71M-71E2 (INTEL CORE I7-12650H/16GB DDR5/1TB SSD PCIE NVME/INTEL UHD GRAPHICS/14 INCH WUXGA IPS
+    /CAMERA
+  /BLUETOOTH 5.1/WIFI 6/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 11.350.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="AL15-41P-R72B" src="foto/acer19.jpg"/>
+  <h3>AL15-41P-R72B (AMD RYZEN 7-5700U/8GB DDR4/512GB PCIE NVME SSD/AMD RADEON GRAPHICS/15.6 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/W11+OHS/RESMI)</h3>
+  <p>Rp 7.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO ANV15-51-51U8" src="foto/acer20.jpg"/>
+  <h3>NITRO ANV15-51-51U8 (INTEL CORE I5-13420H/8GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX2050 4GB/15.6 INCH FHD IPS 165HZ/BACKLITE KEYBOARD
+  /CAMERA/BLUETOOTH 5.2/WI-FI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 9.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO ANV15-51-51U8" src="foto/acer21.jpg"/>
+  <h3>NITRO ANV15-51-51U8 (INTEL CORE I5-13420H/16GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX2050 4GB/15.6 INCH FHD IPS 165HZ/BACKLITE KEYBOARD/CAMERA
+  /BLUETOOTH 5.2/WI-FI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 10.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO V 15 ANV15-51-57YF" src="foto/acer22.jpg"/>
+  <h3>NITRO V 15 ANV15-51-57YF (INTEL CORE I5-13420H/8GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX3050 6GB/15.6 INCH FHD IPS 165HZ/BACKLIT KEYBOARD/CAMERA/BT 5.2/WI-FI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 11.350.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO V ANV15-51-5115" src="foto/acer23.jpg"/>
+  <h3>NITRO V ANV15-51-5115 (INTEL CORE I5-13420H/8GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX4050 6GB/15.6 INCH FHD 144HZ/BACKLITE KEYBOARD/CAMERA/BT 5.2/WI-FI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 14.250.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO V 15 ANV15-51-53X1" src="foto/acer24.jpg"/>
+  <h3>NITRO V 15 ANV15-51-53X1 (INTEL CORE I5-13420H/8GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX2050 4GB/15.6 INCH FHD IPS 180HZ 100%SRGB/BACKLITE KEYBOARD/CAMERA
+  /BLUETOOTH 5.1/WI-FI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 10.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO V 15 ANV15-41-R99D" src="foto/acer25.jpg"/>
+  <h3>NITRO V 15 ANV15-41-R99D (AMD RYZEN 5-6600HS/8GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX3050 6GB/15.6 INCH FHD IPS 165HZ/BACKLITE KEYBOARD/CAMERA
+  /BLUETOOTH 5.1/WI-FI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 10.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO V 16 ANV16-71-79NR" src="foto/acer26.jpg"/>
+  <h3>NITRO V 16 ANV16-71-79NR (INTEL CORE I7-14650HX/16GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX4050 6GB/16 INCH WUXGA IPS 165HZ/CAMERA/BACKLIT KEYBOARD/WI-FI 6
+  /BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 16.585.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO V 16 AN16-41-R77X" src="foto/acer27.jpg"/>
+  <h3>NITRO V 16 AN16-41-R77X (AMD RYZEN 7-8845HS/16GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX4050 6GB/16 INCH WUXGA IPS 165HZ/BACKLITE KEYBOARD/CAMERA/BT 5.3/WI-FI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 15.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="NITRO V 16 ANV16-41-R7W0" src="foto/acer28.jpg"/>
+  <h3>NITRO V 16 ANV16-41-R7W0 (AMD RYZEN 7-8845HS/16GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX4050 6GB/16 INCH WUXGA IPS 165HZ
+  /100% SRGB/BACKLITE KEY/CAMERA/BT 5.3/WI-FI 6E/WIN11+OHS/RESMI)</h3>
+  <p>Rp 15.855.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="acer">
+  <img alt="HELIOS NEO 16 PHN16-72-74Z8" src="foto/acer29.jpg"/>
+  <h3>HELIOS NEO 16 PHN16-72-74Z8 (INTEL CORE I7-14700HX/16GB DDR5/512GB PCIE NVME SSD/NVIDIA GEFORCE RTX4050 6GB/16 INCH WQXGA IPS 180HZ/BACKLIT KEY/CAM/BT 5.2/WI-FI 6E/WIN11+OHS/RESMI)</h3>
+  <p>Rp 19.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Modern 14-C12MO 1058" src="foto/msi1.jpg"/>
+  <h3>MSI Modern 14-C12MO 1058 (Intel Core i3-1215U/8GB DDR4/256GB NVMe SSD/Intel UHD Graphics/14&quot; FHD IPS 60Hz/Anti Glare/Camera/Backlit Keyboard White/Wi-Fi 6/Bluetooth 5.2/Win11+OHS/Resmi)</h3>
+  <p>Rp 5.450.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Modern 14-C12MO 1253" src="foto/msi2.jpg"/>
+  <h3>MSI Modern 14-C12MO 1253 (Intel Core i3-1215U/8GB DDR4/512GB NVMe SSD/Intel UHD Graphics/14&quot; FHD IPS 60Hz/Camera/Backlit Keyboard White/Wi-Fi 6/Bluetooth 5.3/Win11+OHS/Resmi)</h3>
+  <p>Rp 6.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Modern 14-C12MO-1283" src="foto/msi3.jpg"/>
+  <h3>MSI Modern 14-C12MO-1283 (Intel Core i5-1235U/8GB DDR4/512GB NVMe SSD/Intel Iris Xe Graphics/14&quot; FHD IPS 60Hz/Anti Glare/Camera/Backlit Keyboard White/Wi-Fi 6/Bluetooth 5.3/Win11+OHS/Resmi)</h3>
+  <p>Rp 7.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Thin 15 B12UC" src="foto/msi4.jpg"/>
+  <h3>MSI Thin 15 B12UC (Intel Core i5-12450H/8GB DDR4/512GB NVMe SSD/NVIDIA GeForce RTX3050 4GB/15.6&quot; FHD IPS 144Hz/Camera/Backlit Keyboard/Wi-Fi 6E/Bluetooth 5.3/Win11/Resmi)</h3>
+  <p>Rp 9.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Modern 14 C7M 406" src="foto/msi5.jpg"/>
+  <h3>MSI Modern 14 C7M 406 (AMD Ryzen 5-7430U/8GB DDR4/512GB NVMe SSD/AMD Radeon Graphics/14&quot; FHD/Camera/Backlit Keyboard/Wi-Fi 6E/Bluetooth 5.3/Win11+OHS/Resmi)</h3>
+  <p>Rp 7.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Thin A15 B7UCX" src="foto/msi6.jpg"/>
+  <h3>MSI Thin A15 B7UCX (AMD Ryzen 5-7535HS/8GB DDR5/512GB NVMe SSD/NVIDIA GeForce RTX2050 4GB/15.6&quot; FHD IPS 144Hz/Camera/Backlit Keyboard White/Wi-Fi 6E/Bluetooth 5.3/Win11+OHS/Resmi)</h3>
+  <p>Rp 9.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Thin GF63 12UC" src="foto/msi7.jpg"/>
+  <h3>MSI Thin GF63 12UC (Intel Core i7-12650H/8GB DDR4/512GB NVMe SSD/NVIDIA GeForce RTX3050 4GB/15.6&quot; FHD IPS 144Hz/Camera/Backlit Keyboard/Wi-Fi 6/Bluetooth 5.2/Win11/Resmi)</h3>
+  <p>Rp 10.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Thin 15 B13UCX" src="foto/msi8.jpg"/>
+  <h3>MSI Thin 15 B13UCX (Intel Core i7-13620H/8GB DDR4/512GB NVMe SSD/NVIDIA GeForce RTX2050 4GB/15.6&quot; FHD IPS 144Hz/Camera/Backlit Keyboard/Wi-Fi 6E/Bluetooth 5.3/Win11+OHS21/Resmi)</h3>
+  <p>Rp 11.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="msi">
+  <img alt="MSI Modern 14 C7M 280" src="foto/msi9.jpg"/>
+  <h3>MSI Modern 14 C7M 280 (AMD Ryzen 7-7730U/16GB DDR4/512GB NVMe SSD/AMD Radeon Graphics/14&quot; FHD IPS 60Hz/Camera/Backlit Keyboard/Wi-Fi 6E/Bluetooth 5.3/Win11+OHS/Resmi)</h3>
+  <p>Rp 9.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="spc">
+  <img alt="SPC LIFE 5-12450H14WYS512M8WI6" src="foto/spc1.jpg"/>
+  <h3>SPC LIFE 5-12450H14WYS512M8WI6 (Intel Core i5-12450H/8GB DDR4/512GB SSD NVMe PCIE/Intel UHD Graphics/14&quot; FHD IPS/Camera/Wi-Fi 6/Bluetooth 5/Win11 Pro/Resmi)</h3>
+  <p>Rp 6.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan Soulmate 1405" src="foto/advan1.jpg"/>
+  <h3>ADVAN Soulmate 1405 (Intel Gemini Lake N4020/4GB DDR4/128GB EMMC/Intel UHD Graphics/14&quot; HD/Camera/Wi-Fi 5/Bluetooth 4.2/Win11/Resmi)</h3>
+  <p>Rp 2.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan Tbook" src="foto/advan2.jpg"/>
+  <h3>ADVAN Tbook (Intel Core N100/4GB DDR4/128GB EMMC/Intel UHD Graphics/14&quot; HD/Camera/Wi-Fi 5/Bluetooth 5.0/Win11/Resmi)</h3>
+  <p>Rp 3.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan Tbook L24E-NSNS1" src="foto/advan3.jpg"/>
+  <h3>ADVAN Tbook L24E-NSNS1 (Intel Core N100/8GB DDR4/128GB EMMC/Intel UHD Graphics/14&quot; HD/Camera/Wi-Fi 5/Bluetooth 5.0/Win11/Resmi)</h3>
+  <p>Rp 3.450.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan Tbook L24E SSD" src="foto/advan4.jpg"/>
+  <h3>ADVAN Tbook L24E-NSNS1 (Intel Core N100/8GB DDR4/128GB EMMC + 256GB SSD/Intel UHD Graphics/14&quot; HD/Camera/Wi-Fi 5/Bluetooth 5.0/Win11/Resmi)</h3>
+  <p>Rp 3.600.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan Tbook Transformer" src="foto/advan5.jpg"/>
+  <h3>ADVAN Tbook Transformer (Intel Core N100/4GB DDR4/128GB EMMC/Intel UHD Graphics/14&quot; HD/Camera/Wi-Fi 5/Bluetooth 5.1/Win11/Resmi)</h3>
+  <p>Rp 3.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan EVO-X T25A-NSNS1" src="foto/advan6.jpg"/>
+  <h3>ADVAN EVO-X T25A-NSNS1 (Intel Core N100/12GB LPDDR5/512GB NVMe SSD/Intel UHD Graphics/Touchscreen
+    /Docking/13&quot;/Camera
+  /Wi-Fi 5/Bluetooth 5.0/Win11/Resmi)</h3>
+  <p>Rp 6.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan 360 Stylus Pro L24F-13AD1" src="foto/advan.jpg"/>
+  <h3>ADVAN 360 Stylus Pro L24F-13AD1 (Intel Core i3-1215U/8GB DDR4/256GB PCIe SSD/Intel UHD Graphics/14&quot; FHD IPS/Touchscreen/Flip 360°/Camera/Backlit Keyboard/Wi-Fi 5/Bluetooth 5.1/Win11/Resmi)</h3>
+  <p>Rp 6.600.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan WorkPro Lite i3" src="foto/advan8.jpg"/>
+  <h3>ADVAN WorkPro Lite (Intel Core i3-1220P/8GB DDR4/256GB SSD NVMe PCIe/Intel UHD Graphics/14&quot; HD TN/Camera/Wi-Fi 5/Bluetooth 5.1/Win11/Resmi)</h3>
+  <p>Rp 4.700.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan WorkPro Lite i5" src="foto/advan9.jpg"/>
+  <h3>ADVAN WorkPro Lite (Intel Core i5-12450H/8GB DDR4/256GB SSD NVMe PCIe/Intel UHD Graphics/14&quot; FHD IPS/Camera/Wi-Fi 5/Bluetooth 5.1/Win11/Resmi)</h3>
+  <p>Rp 5.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan WorkPro 512GB" src="foto/advan10.jpg"/>
+  <h3>ADVAN WorkPro (Intel Core i5-12450H/8GB DDR4/512GB M.2 SATA/Intel UHD Graphics/14&quot; FHD IPS/Camera/Wi-Fi 5/Bluetooth 5.1/Win11/Resmi)</h3>
+  <p>Rp 6.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan WorkPlus 24GB" src="foto/advan11.jpg"/>
+  <h3>ADVAN WorkPlus (Intel Core i5-12600U/24GB LPDDR5/512GB SSD NVMe PCIe/Intel Iris Xe Graphics/14&quot; FHD IPS/Camera
+  /Fingerprint/Wi-Fi 6/Bluetooth 5.3/Win11/Resmi)</h3>
+  <p>Rp 7.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan AI Gen Ultra" src="foto/advan12.jpg"/>
+  <h3>ADVAN AI Gen Ultra (Intel Core Ultra 5-125H/16GB LPDDR5X/512GB SSD NVMe PCIe/Intel ARC Graphics/14&quot; FHD IPS/Camera/Backlit Keyboard/Wi-Fi 6/Bluetooth 5.2/Win11/Resmi)</h3>
+  <p>Rp 9.700.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan WorkPlus Heritage R5" src="foto/advan13.jpg"/>
+  <h3>ADVAN WorkPlus Heritage L25B-R57S1 (AMD Ryzen 5 7535HS/8GB DDR5/512GB SSD/AMD Radeon 660M Graphics/14&quot; WUXGA/Camera/Backlit Keyboard White/Wi-Fi 6/Bluetooth 5.2/Win11/Resmi)</h3>
+  <p>Rp 6.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan 360 Stylus R5" src="foto/advan14.jpg"/>
+  <h3>ADVAN 360 Stylus Pro L24F-R57S1 (AMD Ryzen 5-7430U/8GB DDR4/512GB PCIe SSD/AMD Radeon Graphics/14&quot; FHD IPS/Touchscreen/Flip 360°/Camera/Wi-Fi 5/Bluetooth 5.1/Win11/Resmi)</h3>
+  <p>Rp 7.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan Soulmate Plus R5" src="foto/advan15.jpg"/>
+  <h3>ADVAN Soulmate Plus 1405 (AMD Ryzen 5-3500U/8GB DDR4/256GB SSD/AMD Radeon RX Vega 8/14&quot;/Camera/Wi-Fi 5/Bluetooth 5.0/Win11/Resmi)</h3>
+  <p>Rp 4.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan WorkPlus Darbotz R7" src="foto/advan16.jpg"/>
+  <h3>ADVAN WorkPlus Darbotz HT716S05A (AMD Ryzen 7 7735HS/16GB LPDDR5/512GB SSD NVMe PCIe/AMD Radeon 680M/14&quot; FHD IPS/Camera/Backlit Keyboard White/Fingerprint/Wi-Fi 6/Bluetooth 5.2/Win11/Resmi)</h3>
+  <p>Rp 8.100.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan WorkPlus R7" src="foto/advan17.jpg"/>
+  <h3>ADVAN WorkPlus R7 T-16S5 (AMD Ryzen 7 7735HS/16GB DDR5/512GB SSD NVMe PCIe/AMD Radeon 680M/14&quot; FHD IPS/Camera/Backlit Keyboard White/Fingerprint/Wi-Fi 6/Bluetooth 5.2/Win11/Resmi)</h3>
+  <p>Rp 8.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan Pixwar Transformers R7" src="foto/advan18.jpg"/>
+  <h3>ADVAN Pixwar Transformers One L25A-R76S1 (AMD Ryzen 7 6800H/16GB DDR5/512GB SSD NVMe/AMD Radeon 680M/15.6&quot; FHD IPS/Camera/Backlit Keyboard White/Wi-Fi 6/Bluetooth 5.3/Win11/Resmi)</h3>
+  <p>Rp 8.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="advan">
+  <img alt="Advan AI Gen R7" src="foto/advan19.jpg"/>
+  <h3>ADVAN AI Gen L24A-R78S1 (AMD Ryzen 7 8845HS/16GB DDR5/512GB SSD NVMe PCIe/AMD Radeon Graphics/14&quot; FHD IPS/Camera/Backlit Keyboard/Wi-Fi 6/Bluetooth 5.1/Win11/Resmi)</h3>
+  <p>Rp 9.550.000</p>
+</div>
+
+<!-- HYPE 1 Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 1" src="foto/axioo1.jpg"/>
+  <h3>HYPE 1 (INTEL CELERON N4020/4GB DDR4/128GB SSD SATA/INTEL UHD GRAPHICS 600/14 INCH HD/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp2.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 1" src="foto/axioo2.jpg"/>
+  <h3>HYPE 1 (INTEL CELERON N4020/8GB DDR4/128GB M.2 SATA/INTEL UHD GRAPHICS 600/14 INCH HD/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp 3.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 10" src="foto/axioo3.jpg"/>
+  <h3>HYPE 10 (INTEL CELERON N4020/8GB DDR4/256GB M.2 SATA SSD/INTEL UHD GRAPHICS/14 INCH HD/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/DOS/RESMI)</h3>
+  <p>Rp 3.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 1" src="foto/axioo4.jpg"/>
+  <h3>HYPE 1 (INTEL CELERON N4020/8GB DDR4/384GB M.2 SATA SSD/INTEL UHD GRAPHICS/14 INCH HD/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp 3.450.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 1" src="foto/axioo5.jpg"/>
+  <h3>HYPE 1 (INTEL CELERON N4020/8GB DDR4/640GB SSD SATA/INTEL UHD GRAPHICS 600/14 INCH HD/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp 3.700.000</p>
+</div>
+
+<!-- HYPE 3 Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 3" src="foto/axioo6.jpg"/>
+  <h3>HYPE 3 (INTEL CORE I3-1005G1/8GB DDR4/256GB SSD NVME+M.2/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.0/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 4.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 3-G11" src="foto/axioo7.jpg"/>
+  <h3>HYPE 3-G11 (INTEL CORE I3-1125G4/8GB DDR4/256GB SSD NVME+M.2/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.0/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 4.450.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 3-G11" src="foto/axioo8.jpg"/>
+  <h3>HYPE 3-G11 (INTEL CORE I3-1125G4/8GB DDR4/256GB SSD NVME+M.2/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.0/WIFI 5/WIN11/RESMI)</h3>
+  <p>Rp 4.750.000</p>
+</div>
+
+<!-- HYPE JKT 48 -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE JKT 48" src="foto/axioo9.jpg"/>
+  <h3>HYPE JKT 48 (INTEL CORE I3-1215U/16GB DDR4/512GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA
+  /BLUETOOTH 5.1/WIFI 5/WIN11/RESMI)</h3>
+  <p>Rp 5.650.000</p>
+</div>
+
+<!-- HYPE R3 Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE R3" src="foto/axioo10.jpg"/>
+  <h3>HYPE R3 (INTEL CORE I3-1215U/12GB LPDDR5/256GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE
+  /BLUETOOTH 5.0/WIFI 6/DOS/RESMI)</h3>
+  <p>Rp 5.700.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE R3" src="foto/axioo11.jpg"/>
+  <h3>HYPE R3 (INTEL CORE I3-1215U/12GB LPDDR5/256GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE
+  /BLUETOOTH 5.0/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp 6.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE R3 OLED" src="foto/axioo12.jpg"/>
+  <h3>HYPE R3 OLED (INTEL CORE I3-1215U/24GB LPDDR5/256GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD+ OLED/CAMERA/BACKLIT KEYBOARD
+  /BLUETOOTH 5.0/WIFI 6/DOS/RESMI)</h3>
+  <p>Rp 7.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE R3 OLED" src="foto/axioo13.jpg"/>
+  <h3>HYPE R3 OLED (INTEL CORE I3-1215U/24GB LPDDR5/256GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD+ OLED/CAMERA/BACKLIT KEYBOARD
+  /BLUETOOTH 5.2/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp 7.500.000</p>
+</div>
+
+<!-- HYPE R5 OLED -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE R5 OLED" src="foto/axioo14.jpg"/>
+  <h3>HYPE R5 OLED (INTEL CORE I5-1235U/24GB LPDDR5/512GB SSD NVME/INTEL IRIS XE GRAPHICS/14 INCH FHD+ OLED/CAMERA/BACKLIT KEYBOARD
+  /BLUETOOTH 5.2/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp 9.000.000</p>
+</div>
+
+<!-- HYPE 5 Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5" src="foto/axioo15.jpg"/>
+  <h3>HYPE 5 (INTEL CORE I5-1235U/16GB DDR4/512GB SSD M.2 NVME/INTEL IRIS XE GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.1/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 6.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5" src="foto/axioo16.jpg"/>
+  <h3>HYPE 5 (INTEL CORE I5-1235U/16GB DDR4/512GB SSD M.2 NVME/INTEL IRIS XE GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.1/WIFI 5/WIN11/RESMI)</h3>
+  <p>Rp 6.450.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5" src="foto/axioo17.jpg"/>
+  <h3>HYPE 5 (INTEL CORE I5-1235U/8GB DDR4/256GB M.2 SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.1/WIFI 5/WIN11/RESMI)</h3>
+  <p>Rp 6.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5" src="foto/axioo18.jpg"/>
+  <h3>HYPE 5 (INTEL CORE I5-1235U/8GB DDR4/256GB M.2 SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BLUETOOTH 5.1/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 5.550.000</p>
+</div>
+
+<!-- HYPE R 5 Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE R 5" src="foto/axioo19.jpg"/>
+  <h3>HYPE R 5 (INTEL CORE I5-1235U/24GB LPDDR5/512GB SSD M.2 NVME/INTEL IRIS XE GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE
+  /BLUETOOTH 5.2/WIFI 6/DOS/RESMI) GREY</h3>
+  <p>Rp 7.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE R 5" src="foto/axioo20.jpg"/>
+  <h3>HYPE R 5 (INTEL CORE I5-1235U/24GB LPDDR5/512GB SSD M.2 NVME/INTEL IRIS XE GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE
+  /BLUETOOTH 5.2/WIFI 6/W11/RESMI) GREY</h3>
+  <p>Rp 8.000.000</p>
+</div>
+
+<!-- HYPE 5 AMD Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5 AMD X JKT48" src="foto/axioo21.jpg"/>
+  <h3>HYPE 5 AMD X JKT48 EDITION (AMD RYZEN 5-3500U/8GB DDR4/256GB SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE
+  /BLUETOOTH 5.1/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 4.250.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5 AMD X JKT48" src="foto/axioo22.jpg"/>
+  <h3>AXIOO HYPE 5 AMD X JKT48 EDITION (AMD RYZEN 5-3500U/8GB DDR4/256GB SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE
+  /BLUETOOTH 5.1/WIFI 5/WIN11/RESMI)</h3>
+  <p>Rp 4.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5 AMD X6" src="foto/axioo23.jpg"/>
+  <h3>HYPE 5 AMD X6 (AMD RYZEN 5-6600H/16GB DDR4/512GB NVME SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD
+  /BLUETOOTH 5.2/WIFI 6/W11/RESMI)</h3>
+  <p>Rp 7.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5 AMD X5-2" src="foto/axioo24.jpg"/>
+  <h3>HYPE 5 AMD X5-2 (AMD RYZEN 5-7430U/8GB DDR4/256GB NVME SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD
+  /BLUETOOTH 5.0/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 5.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 5 AMD X5-2 LOLLIPOP" src="foto/axioo25.jpg"/>
+  <h3>HYPE 5 AMD X5-2 / LOLLIPOP (AMD RYZEN 5-7430U/8GB DDR4/256GB NVME SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD/BLUETOOTH 5.0/WIFI 5/W11/RESMI)</h3>
+  <p>Rp 5.850.000</p>
+</div>
+
+<!-- HYPE 7 AMD Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 7 AMD X7-2" src="foto/axioo26.jpg"/>
+  <h3>HYPE 7 AMD X7-2 (AMD RYZEN 7-5825U/8GB DDR4/512GB SSD PCIE/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/BLUETOOTH 5.2/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 6.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 7 AMD X7-2" src="foto/axioo27.jpg"/>
+  <h3>HYPE 7 AMD X7-2 (AMD RYZEN 7-5825U/8GB DDR4/512GB SSD PCIE/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/BLUETOOTH 5.2/WIFI 5/WIN11/RESMI)</h3>
+  <p>Rp 6.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 7 AMD X7-2" src="foto/axioo28.jpg"/>
+  <h3>HYPE 7 AMD X7-2 (AMD RYZEN 7-5825U/16GB DDR4/512GB SSD PCIE/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/BLUETOOTH 5.2/WIFI 5/DOS/RESMI)</h3>
+  <p>Rp 6.850.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 7 AMD X7-2" src="foto/axioo29.jpg"/>
+  <h3>HYPE 7 AMD X7-2 (AMD RYZEN 7-5825U/16GB DDR4/512GB SSD PCIE/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/BLUETOOTH 5.2/WIFI 5/WIN11/RESMI)</h3>
+  <p>Rp 7.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="HYPE 7 AMD X8" src="foto/axioo30.jpg"/>
+  <h3>HYPE 7 AMD X8 (AMD RYZEN 7-6800H/16GB DDR5/512GB SSD PCIE/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD/BLUETOOTH 5.2/WIFI 6/WIN11/RESMI)</h3>
+  <p>Rp 8.200.000</p>
+</div>
+
+<!-- PONGO Gaming Series -->
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 725" src="foto/axioo31.jpg"/>
+  <h3>PONGO 725 (INTEL CORE I7-12650H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX2050 4GB/15.6 INCH FHD IPS 144HZ/CAMERA/BACKLIT KEYBOARD/BLUETOOTH 5.2/WI-FI 6/DOS/RESMI) GAMING!!</h3>
+  <p>Rp 9.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 725" src="foto/axioo32.jpg"/>
+  <h3>PONGO 725 (INTEL CORE I7-12650H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX2050 4GB/15.6 INCH FHD IPS 144HZ/CAMERA/BACKLIT KEYBOARD/BLUETOOTH 5.2/WI-FI 6/WIN11/RESMI) GAMING!!</h3>
+  <p>Rp 10.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 735" src="foto/axioo33.jpg"/>
+  <h3>PONGO 735 (INTEL CORE I7-13620H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX3050 6GB/15.6 INCH FHD IPS 144HZ/CAMERA/BACKLIT KEYBOARD/BLUETOOTH 5.2/WI-FI 6/DOS/RESMI) GAMING!!</h3>
+  <p>Rp 11.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 735" src="foto/axioo34.jpg"/>
+  <h3>PONGO 735 (INTEL CORE I7-13620H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX3050 6GB/15.6 INCH FHD IPS 144HZ/CAMERA/BACKLIT KEYBOARD/BLUETOOTH 5.2/WI-FI 6/WIN11/RESMI) GAMING!!</h3>
+  <p>Rp 12.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 750" src="foto/axioo35.jpg"/>
+  <h3>PONGO 750 (INTEL CORE I7-13620H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX4050 6GB/15.6 INCH FHD IPS 144HZ/CAMERA/RGB BACKLIT KEYBOARD/BLUETOOTH 5.2/WI-FI 6/DOS/RESMI) GAMING!!</h3>
+  <p>Rp 13.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 750" src="foto/axioo36.jpg"/>
+  <h3>PONGO 750 (INTEL CORE I7-13620H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX4050 6GB/15.6 INCH FHD IPS 144HZ/CAMERA/RGB BACKLIT KEYBOARD/BLUETOOTH 5.2/WI-FI 6/WIN11/RESMI) GAMING!!</h3>
+  <p>Rp 13.850.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 760 V2" src="foto/axioo37.jpg"/>
+  <h3>PONGO 760 V2 (INTEL CORE I7-13620H/16GB DDR4/512GB M.2 PCIE NVE SSD/NVIDIA GEFORCE RTX4060 8GB/15.6 INCH FHD IPS 144HZ/CAMERA/RGB BACKLIT KEYBOARD/BLUETOOTH 5.3/WI-FI 6/DOS/RESMI) GAMING!!</h3>
+  <p>Rp 16.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="axioo">
+  <img alt="PONGO 760 V2" src="foto/axioo38.jpg"/>
+  <h3>PONGO 760 V2 (INTEL CORE I7-13620H/16GB DDR4/512GB M.2 PCIE NVE SSD/NVIDIA GEFORCE RTX4060 8GB/15.6 INCH FHD IPS 144HZ/CAMERA/RGB BACKLIT KEYBOARD/BLUETOOTH 5.3/WI-FI 6/WIN11/RESMI) GAMING!!</h3>
+  <p>Rp 16.300.000</p>
+</div>
+
+<!-- HP Laptops -->
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14S-DQ3127TU" src="foto/hp1.jpg"/>
+  <h3>HP 14S-DQ3127TU (INTEL CELERON N4500/4GB DDR4/512GB SSD/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA/WI-FI 5/BLUETOOTH 5
+  /BACKLIT KEYBOARD/WIN11/RESMI)</h3>
+  <p>Rp 4.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14S-DQ3888TU" src="foto/hp2.jpg"/>
+  <h3>HP 14S-DQ3888TU (INTEL CELERON N4500/8GB DDR4/512GB PCIE NVME M.2 SSD/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA/WI-FI 5
+  /BLUETOOTH 5.0/BACKLIT KEYBOARD/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 5.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14-EM0222AU" src="foto/hp3.jpg"/>
+  <h3>HP 14-EM0222AU/EM0223AU (AMD ATHLON 7120U/8GB LPDDR5/512GB PCIE NVME M.2 SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/BACKLIT KEYBOARD WHITE/CAMERA
+  /BLUETOOTH 5.3/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 5.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14-EP0890TU" src="foto/hp4.jpg"/>
+  <h3>HP 14-EP0890TU (INTEL CORE I3-N305/8GB DDR4/256GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA/WI-FI 6
+  /BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 5.850.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14S-DQ5567TU" src="foto/hp5.jpg"/>
+  <h3>HP 14S-DQ5567TU (INTEL CORE I3-1215U/8GB DDR4/512GB PCIE NVME M.2 SSD/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/CAMERA
+  /BLUETOOTH 5.0/WIFI 5/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14S-DQ5568TU" src="foto/hp6.jpg"/>
+  <h3>HP 14S-DQ5568TU (INTEL CORE I3-1215U/8GB DDR4/512GB PCIE NVME M.2 SSD/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/CAMERA
+  /BLUETOOTH 5.0/WIFI 5/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14-EP0269TU" src="foto/hp7.jpg"/>
+  <h3>HP 14-EP0269TU (INTEL CORE I3-1315U/4GB DDR4/512GB PCIE NVME M.2 SSD/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/CAMERA
+  /BLUETOOTH 5.3/WIFI 6E/WIN11+OHS 2024/RESMI)</h3>
+  <p>Rp 6.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14-EP0261TU" src="foto/hp8.jpg"/>
+  <h3>HP 14-EP0261TU (INTEL CORE I3-1315U/8GB DDR4/512GB PCIE NVME M.2 SSD/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/CAMERA
+  /BLUETOOTH 5.3/WIFI 6/WIN11+OHS 2024/RESMI)</h3>
+  <p>Rp 6.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP PAVILION X360" src="foto/hp9.jpg"/>
+  <h3>HP PAVILION X360 14 TOUCH EK2051TU (INTEL CORE 3 100U/8GB DDR4/512GB PCIE NVME M.2 SSD/INTEL GRAPHICS/14 INCH FHD IPS/CAM/BACKLIT KEY
+  /TOUCHSCREEN/FLIP 360°/WI-FI 6/BT 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 10.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14-EM0332AU" src="foto/hp10.jpg"/>
+  <h3>HP 14-EM0332AU/EM0333AU (AMD RYZEN 3-7320U/8GB LPDDR5/512GB PCIE NVME M.2 SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/BACKLIT KEYBOARD WHITE/CAMERA
+  /BLUETOOTH 5.3/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 6.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14 EP0002TU" src="foto/hp11.jpg"/>
+  <h3>HP 14 EP0002TU (INTEL CORE I5-1335/8GB DDR4/512GB SSD NVME/INTEL IRIS XE GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/WI-FI 6
+  /BLUETOOTH 5.3/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 8.350.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP PAVILION X360" src="foto/hp12.jpg"/>
+  <h3>HP PAVILION X360 14-EK2111TU/2333TU TOUCH (INTEL CORE 5-120U/16GB DDR4/512GB PCIE NVME M.2 SSD/INTEL GRAPHICS/14 INCH FHD IPS/CAMERA/FLIP 360
+  /BACKLIT KEY/FINGERPRINT/BT 5.3/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 11.600.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14-EM0018AU" src="foto/hp13.jpg"/>
+  <h3>HP 14-EM0018AU/19AU (AMD RYZEN 5-7530U/8GB LPDDR4/512GB PCIE NVME M.2 SSD/AMD RADEON GRAPHICS/BACKLIT KEYBOARD/14 INCH FHD IPS/CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 7.550.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP PAVILION PLUS" src="foto/hp14.jpg"/>
+  <h3>HP PAVILION PLUS 14-EY0016AU (AMD RYZEN 5 7540/16GB LPDDR5X/512GB SSD M.2 SSD/AMD RADEON GRAPHICS /14 INCH WUXGA UWVA IPS/CAMERA/BACKLIT KEYBOARD/WI-FI 6/BLUETOOTH 5.3/W11+OHS 2021/RESMI)</h3>
+  <p>Rp 10.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP PAVILION AERO" src="foto/hp15.jpg"/>
+  <h3>HP PAVILION AERO 13-BG0111AU/BG0222AU (AMD RYZEN 5-8640U/16GB LPDDR5X/512GB PCIE NVME M.2 SSD/AMD RADEON GRAPHICS/13.3 INCH WUXGA IPS/CAMERA/BACKLIT KEY/BT 5.3/WIFI 6/WIN11+OHS2021/RESMI)</h3>
+  <p>Rp 12.350.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP PAVILION PLUS" src="foto/hp16.jpg"/>
+  <h3>HP PAVILION PLUS 14-EW0080TU (INTEL CORE I7-1355U/16GB LPDDR5X/1TB PCIE NVME M.2 SSD/INTEL IRIS XE GRAPHICS /14 INCH 2.8K OLED 120HZ/CAMERA/BACKLIT KEYBOARD/WI-FI 6E/BT 5.3/W11+OHS 2021/RESMI)</h3>
+  <p>Rp 16.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14S-DQ5155TU" src="foto/hp17.jpg"/>
+  <h3>HP 14S-DQ5155TU (INTEL CORE I7-1255U/8GB DDR4/512GB PCIE NVME M.2 SSD/INTEL IRIS XE GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/FINGERPRINT/CAM/BLUETOOTH 5.0/WIFI 5/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 10.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP 14-EM0167AU" src="foto/hp18.jpg"/>
+  <h3>HP 14-EM0167AU/0168AU (AMD RYZEN 7-7730U/16GB DDR4/512GB SSD NVME/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE/BLUETOOTH 5.3/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 8.900.000</p>
+</div>
+
+<!-- HP Gaming Series -->
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP VICTUS 15-FB1013DX" src="foto/hp19.jpg"/>
+  <h3>HP GAMING VICTUS 15-FB1013DX (AMD RYZEN 5-7535HS/8GB DDR5/512GB SSD NVME/NVIDIA GEFORCE RTX 2050 4GB/15.6 INCH FHD IPS 144HZ/BACKLIT KEYBOARD/CAMERA/BLUETOOTH 5/WIFI 6/WIN11/DISTRI1) GAMING !!</h3>
+  <p>Rp 9.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP VICTUS 15-FA2715TX" src="foto/hp20.jpg"/>
+  <h3>HP GAMING VICTUS 15-FA2715TX (INTEL CORE I5-13420H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX 2050 4GB/15.6 INCH FHD IPS 144HZ/BACKLIT KEYBOARD/CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS/RESMI) GAMING !!</h3>
+  <p>Rp 11.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP VICTUS 15-FA2716TX" src="foto/hp21.jpg"/>
+  <h3>HP GAMING VICTUS 15-FA2716TX (INTEL CORE I5-13420H/16GB DDR4/512GB SSD NVME/NVIDIA GEFORCE RTX 3050 4GB/15.6 INCH FHD IPS 144HZ/BACKLIT KEYBOARD/CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS/RESMI) GAMING !!</h3>
+  <p>Rp 12.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="hp">
+  <img alt="HP VICTUS 15-FB2555AX" src="foto/hp22.jpg"/>
+  <h3>HP GAMING VICTUS 15-FB2555AX (AMD RYZEN 7-8845HS/8GB DDR5/512GB SSD/NVIDIA GEFORCE RTX 4050 6GB/15.6 INCH FHD IPS 144HZ/ANTI GLARE
+  /BACKLIT KEYBOARD/CAMERA/BLUETOOTH 5.3/WIFI 6/WIN11+OHS/RESMI) GAMING !!</h3>
+  <p>Rp 15.800.000</p>
+</div>
+
+<!-- Lenovo IdeaPad Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 1 14IGL7" src="foto/lenovo1.jpg"/>
+  <h3>IDEAPAD 1 14IGL7-9PID (INTEL CELERON N4020/8GB DDR4/256GB SSD NVME/INTEL HD GRAPHICS/14 INCH HD/CAMERA/WI-FI 6
+  /BLUETOOTH 5.0/WIN11+OHS/RESMI)</h3>
+  <p>Rp 4.700.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 1 14IGL7" src="foto/lenovo2.jpg"/>
+  <h3>IDEAPAD 1 14IGL7-9PID (INTEL CELERON N4020/8GB DDR4/512GB SSD NVME/INTEL UHD GRAPHICS/14 INCH HD/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/WIN11+OHS/RESMI)</h3>
+  <p>Rp5.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 1" src="foto/lenovo3.jpg"/>
+  <h3>IDEAPAD SLIM 1 14IJL7-6BID (INTEL CELERON N4500/8GB DDR4/512GB SSD NVME/INTEL UHD GRAPHICS/14 INCH HD TN/CAMERA
+  /BLUETOOTH 5.2/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 5.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 1 14AMN7" src="foto/lenovo4.jpg"/>
+  <h3>IDEAPAD 1 14AMN7-A6ID (AMD ATHLON SILVER 7120U/8GB LPDDR5/256GB SSD M.2 PCIE NVME/AMD RADEON GRAPHICS/14 INCH HD/CAMERA
+  /BLUETOOTH 5.2/WIFI 6/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 5.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 1 14AMN7" src="foto/lenovo5.jpg"/>
+  <h3>IDEAPAD 1 14AMN7-6UID (AMD ATHLON SILVER 7120U/8GB LPDDR5/512GB SSD M.2 PCIE NVME/AMD RADEON GRAPHICS/14 INCH HD/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 5.500.000</p>
+</div>
+
+<!-- Lenovo Commercial Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="COMMERCIAL V14 G4" src="foto/lenovo6.jpg"/>
+  <h3>COMMERCIAL V14 G4 AMN-VAID (AMD ATHLON SILVER 7120U/8GB LPDDR5/256GB SSD M.2 PCIE NVME/AMD RADEON GRAPHICS/14 INCH FHD/CAMERA
+  /BLUETOOTH 5.1/WIFI 5/DOS/RESMI) ARCTIC GREY</h3>
+  <p>Rp 4.650.000</p>
+</div>
+
+<!-- Lenovo 2-in-1 Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD DUET 3" src="foto/lenovo7.jpg"/>
+  <h3>IDEAPAD DUET 3 11IAN8 TOUCH (INTEL N200/8GB LPDDR5/256GB SSD/INTEL UHD GRAPHICS/11.5 INCH 2K IPS/TOUCHSCREEN/DOCKING/CAMERA
+  /BLUETOOTH 5.1/WIFI 6/WIN11+OHS/RESMI)</h3>
+  <p>Rp 8.800.000</p>
+</div>
+
+<!-- Lenovo Core i3 Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 14IAU7" src="foto/lenovo8.jpg"/>
+  <h3>IDEAPAD 14IAU7 (INTEL CORE I3-1215U/8GB DDR4/256GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 5.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 3 14IAU7" src="foto/lenovo9.jpg"/>
+  <h3>IDEAPAD 3 14IAU7 (INTEL CORE I3-1215U/8GB DDR4/512GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD/BACKLIT KEYBOARD WHITE/CAMERA/WI-FI 6
+  /BLUETOOTH 5.0/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="COMMERCIAL V14 G3" src="foto/lenovo10.jpg"/>
+  <h3>COMMERCIAL V14 G3 (INTEL CORE I3-1215U/8GB DDR4/256GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA/BT 5.1/WI-FI 6
+  /MILITARY GRADE DURABILITY MIL-STD 810G
+/ANTI GLARE/WIN 11+OHS/RESMI)</h3>
+  <p>Rp 6.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="COMMERCIAL V14 G4" src="foto/lenovo11.jpg"/>
+  <h3>COMMERCIAL V14 G4 IRU-LHID (INTEL CORE I3-1315U/8GB DDR4/256GB SSD NVME/INTEL UHD GRAPHICS/14 INCH FHD/CAMERA
+  /BLUETOOTH 5.1/WI-FI 6/MILITARY GRADE DURABILITY MIL-STD 810G/ANTI GLARE/WIN11+OHS/RESMI)</h3>
+  <p>Rp 6.400.000</p>
+</div>
+
+<!-- Lenovo Ryzen Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 3" src="foto/lenovo12.jpg"/>
+  <h3>IDEAPAD SLIM 3 14AMN8 (AMD RYZEN 3-7320U/8GB LPDDR5/512GB SSD M.2 PCIE NVME/AMD RADEON GRAPHICS/14 INCH FHD/CAMERA/BACKLIT KEY
+  /WI-FI 6/BT 5.2/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 6.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="COMMERCIAL V14 G4" src="foto/lenovo13.jpg"/>
+  <h3>COMMERCIAL V14 G4 AMN (AMD RYZEN 3-7320U/8GB DDR4/256GB SSD NVME/AMD RADEON GRAPHICS/14 INCH FHD/CAMERA
+  /BLUETOOTH 5.1/WI-FI 5/WIN 11+OHS/RESMI)</h3>
+  <p>Rp 5.500.000</p>
+</div>
+
+<!-- Lenovo Core i5 Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 3" src="foto/lenovo14.jpg"/>
+  <h3>IDEAPAD SLIM 3 14IAH8 (INTEL CORE I5-12450H/16GB LPDDR5/512GB SSD M.2 PCIE NVME/INTEL UHD GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEYBOARD WHITE
+  /WI-FI 6/BLUETOOTH 5.2/WIN11+OHS2021/RESMI)</h3>
+  <p>Rp 8.400.000</p>
+</div>
+
+<!-- Lenovo OLED Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 5" src="foto/lenovo15.jpg"/>
+  <h3>IDEAPAD SLIM 5 14IRH10-0QID OLED (INTEL CORE I5-13420H/16GB DDR5/1TB SSD M.2 PCIE NVME/INTEL UHD GRAPHICS/14 INCH WUXGA OLED
+  /CAMERA/BACKLIT KEYBOARD/WI-FI 6/BLUETOOTH 5.2/WIN11+OHS2021/RESMI)</h3>
+  <p>Rp 11.600.000</p>
+</div>
+
+<!-- Lenovo 2-in-1 Convertible -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 5 2IN1" src="foto/lenovo16.jpg"/>
+  <h3>IDEAPAD 5 2IN1 14IRH9-10ID (INTEL CORE I5-13420H/16GB LPDDR5X/512GB SSD M.2 PCIE NVME/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/TOUCHSCREEN
+  /BACKLIT KEYBOARD/FP/FLIP360/CAMERA/WI-FI 6
+/BLUETOOTH 5.2/WIN11+OHS2021/RESMI)</h3>
+  <p>Rp 11.850.000</p>
+</div>
+
+<!-- Lenovo Ryzen 5 Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 1 14" src="foto/lenovo17.jpg"/>
+  <h3>IDEAPAD 1 14 9LID (AMD RYZEN 5-5625U/16GB DDR4/512GB SSD/AMD RADEON VEGA 7 GRAPHICS/14 INCH FHD/CAMERA/WI-FI 6
+  /BLUETOOTH 5.0/BACKLIT KEYBOARD WHITE/WIN11+OHS/RESMI)</h3>
+  <p>Rp 7.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 3" src="foto/lenovo18.jpg"/>
+  <h3>IDEAPAD SLIM 3 14ABR8-7KID (AMD RYZEN 5-7530U/16GB DDR4/512GB SSD M.2 PCIE NVME/AMD RADEON GRAPHICS/14 INCH FHD IPS
+  /CAMERA/BACKLIT KEYBOARD WHITE
+/BLUETOOTH 5.2/WIFI 6/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 8.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 3" src="foto/lenovo19.jpg"/>
+  <h3>IDEAPAD SLIM 3 14ABR8 (AMD RYZEN 5-7530U/8GB DDR4/512GB SSD M.2 PCIE NVME/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA/BACKLIT KEY/WIFI 6
+  /BT 5.1/ANTI GLARE/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 8.200.000</p>
+</div>
+
+<!-- Lenovo Core i7 Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 3" src="foto/lenovo20.jpg"/>
+  <h3>IDEAPAD SLIM 3 14IRH10 (INTEL CORE I7-13620H/16GB DDR5/512GB SSD M.2 PCIE NVME/INTEL UHD GRAPHICS/14 INCH WUXGA IPS
+  /BACKLIT KEYBOARD WHITE/CAMERA/WI-FI 6
+/BLUETOOTH 5.2/WIN11+OHS2021/RESMI)</h3>
+  <p>Rp 11.200.000</p>
+</div>
+
+<!-- Lenovo 2-in-1 OLED -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD 5 2IN1" src="foto/lenovo21.jpg"/>
+  <h3>IDEAPAD 5 2IN1 14IRH9-12ID (INTEL CORE I7-13620H/16GB LPDDR5X/512GB SSD M.2 PCIE NVME/INTEL UHD GRAPHICS
+    /14 INCH WUXGA OLED/TOUCHSCREEN
+  /BACKLIT KEYBOARD/FP/FLIP360/CAMERA/WI-FI 6/BT 5.2/WIN11+OHS2021/RESMI)</h3>
+  <p>Rp 14.200.000</p>
+</div>
+
+<!-- Lenovo Ryzen 7 Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 3" src="foto/lenovo22.jpg"/>
+  <h3>IDEAPAD SLIM 3 14ABR8-8XID (AMD RYZEN 7-5825U/16GB LPDDR4/512GB SSD M.2 PCIE NVME/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAMERA
+  /BACKLIT KEYBOARD WHITE/WIFI 6/BT 5.2/WIN11+OHS/RESMI)</h3>
+  <p>Rp 9.000.000</p>
+</div>
+
+<!-- Lenovo Pro Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD PRO 5" src="foto/lenovo23.jpg"/>
+  <h3>IDEAPAD PRO 5 14AHP9-3LID (AMD RYZEN 7-8845HS/16GB LPDDR5X/1TB SSD M.2 PCIE NVME /NVIDIA GEFORCE RTX3050 6GB
+  /14 INCH 2.8K OLED 120HZ/BACKLIT KEY/CAMERA/WI-FI 6E/BT 5.2/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 18.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="IDEAPAD SLIM 3" src="foto/lenovo24.jpg"/>
+  <h3>IDEAPAD SLIM 3 14ABR8 6HID (AMD RYZEN 7-7730U/16GB DDR4/512GB SSD/AMD RADEON GRAPHICS/14 INCH FHD IPS/CAM/BACKLIT KEY WHITE
+  /WIFI 6/BT 5.1/WIN11+OHS 2021/RESMI) ARCTIC GREY</h3>
+  <p>Rp 9.600.000</p>
+</div>
+
+<!-- Lenovo Yoga Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="YOGA SLIM 7" src="foto/lenovo25.jpg"/>
+  <h3>YOGA SLIM 7 14IMH9-8GID OLED (INTEL CORE ULTRA 5-125H/16GB LPDDR5X/512GB M.2 NVME SSD/INTEL ARC GRAPHICS/14 INCH WUXGA OLED
+  /TOUCHSCREEN/WIFI 6E/BLUETOOTH 5.3/CAMERA/BACKLIT KEYBOARD/WIN11+OHS/RESMI)</h3>
+  <p>Rp 14.700.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="YOGA SLIM 7" src="foto/lenovo26.jpg"/>
+  <h3>YOGA SLIM 7 14IMH9-8FID TOUCH OLED (INTEL CORE ULTRA 7-155H/16GB LPDDR5X/1TB M.2 NVME SSD/INTEL ARC GRAPHICS/14 INCH WUXGA
+  /TOUCHSCREEN/WIFI 6E/BT 5.3/CAMERA/BACKLIT KEYBOARD WHITE/WIN11+OHS/RESMI)</h3>
+  <p>Rp 16.800.000</p>
+</div>
+
+<!-- Lenovo LOQ Gaming Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15AHP9" src="foto/lenovo27.jpg"/>
+  <h3>LOQ 15AHP9-37ID (AMD RYZEN 5-8645HS/8GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 4050 6GB/15.6 FHD IPS 144HZ/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/BACKLIT KEYBOARD/WIN11+OHS 2021/RESMI)</h3>
+  <p>Rp 14.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ ESSENTIAL" src="foto/lenovo28.jpg"/>
+  <h3>LOQ ESSENTIAL 15IAX9E-2QID (INTEL CORE I5-12450HX/12GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 2050 4GB/15.6 FHD IPS 144HZ 100% SRGB
+  /CAMERA/WI-FI 6/BLUETOOTH 5.2/BACKLIT KEYBOARD/WIN11+OHS/RESMI)</h3>
+  <p>Rp 10.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15IAX9" src="foto/lenovo29.jpg"/>
+  <h3>LOQ 15IAX9-1HID (INTEL CORE I5-12450HX/12GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 2050 4GB/15.6 FHD 144HZ/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/BACKLIT KEYBOARD/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 10.200.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15IAX9" src="foto/lenovo30.jpg"/>
+  <h3>LOQ 15IAX9-1HID (INTEL CORE I5-12450HX/20GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 2050 4GB/15.6 FHD 144HZ/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/BACKLIT KEYBOARD/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 10.650.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ ESSENTIAL" src="foto/lenovo31.jpg"/>
+  <h3>LOQ ESSENTIAL 15IAX9E-8UID (INTEL CORE I5-12450HX/12GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 3050 6GB/15.6 FHD 144HZ 100% SRGB
+  /CAMERA/WI-FI 6
+/BLUETOOTH 5.2/BACKLIT KEYBOARD/WIN11+OHS/RESMI)</h3>
+  <p>Rp 11.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15IAX9" src="foto/lenovo32.jpg"/>
+  <h3>LOQ 15IAX9-1JID (INTEL CORE I5-12450HX/12GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 3050 6GB/15.6 FHD 144HZ/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/BACKLIT KEYBOARD/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 11.600.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15ARP9" src="foto/lenovo33.jpg"/>
+  <h3>LOQ 15ARP9-1YID (AMD RYZEN 7-7435HS/12GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 4060 8GB/15.6 FHD IPS 144HZ/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/BACKLIT KEYBOARD/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 15.800.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15IRX9" src="foto/lenovo34.jpg"/>
+  <h3>LOQ 15IRX9-A9ID (INTEL CORE I7-13650HX/12GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 3050 6GB/15.6 FHD IPS 144HZ/CAMERA/WI-FI 6
+  /BT 5.2/BACKLIT KEYBOARD RGB/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 14.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15IRX9" src="foto/lenovo35.jpg"/>
+  <h3>LOQ 15IRX9-A9ID (INTEL CORE I7-13650HX/20GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 3050 6GB/15.6 FHD IPS 144HZ/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/BACKLIT KEYBOARD RGB/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 14.500.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LOQ 15IRX9" src="foto/lenovo36.jpg"/>
+  <h3>LOQ 15IRX9-AHID (INTEL CORE I7-13650HX/12GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX 4050 6GB/15.6 FHD IPS 144HZ/CAMERA/WI-FI 6
+  /BLUETOOTH 5.2/BACKLIT KEYBOARD RGB/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 16.600.000</p>
+</div>
+
+<!-- Lenovo Legion Gaming Series -->
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LEGION 5" src="foto/lenovo37.jpg"/>
+  <h3>LEGION 5 15IRX9-0BID (INTEL CORE I7-13650HX/24GB DDR5/512GB SSD M.2 PCIE NVME/NVIDIA GEFORCE RTX4060 8GB/15.6FHD 144HZ 100SRGB/CAMERA
+  /BACKLIGHT KEY/BT 5.1/WIFI 6/WIN11+OHS 2021/RESMI) GAMING !!</h3>
+  <p>Rp 20.000.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="lenovo">
+  <img alt="LEGION 5" src="foto/lenovo38.jpg"/>
+  <h3>LEGION 5 16IRX9-BWID (INTEL CORE I7-14650HX/16GB DDR5/512GB SSD M2 PCIE NVME/NVIDIA GEFORCE RTX4050 6GB/16 INCH WQXGA IPS 165HZ 100%SRGB/CAMERA
+  /WI-FI 6E/BT 5.2/RGB BACKLIT KEY/WIN11+OHS/RESMI) GAMING !!</h3>
+  <p>Rp 21.650.000</p>
+</div>
+
+<!-- Apple MacBook Air Series -->
+<div class="product-card" data-category="laptop" data-brand="apple">
+  <img alt="MACBOOK AIR 13 M1" src="foto/apple1.jpg"/>
+  <h3>MACBOOK AIR 13 MGN63ID/MGN93ID/A MGND3ID/A (APPLE M1 8C/8GB/256GB SSD/13.3 INCH/CAMERA/BLUETOOTH 5.0/WI-FI 6/OS X)</h3>
+  <p>Rp 11.400.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="apple">
+  <img alt="MACBOOK AIR 13 M2" src="foto/apple2.jpg"/>
+  <h3>MACBOOK AIR 13 MC7U4ID (APPLE M2 8C/16GB/256GB SSD/13.6 INCH IS/CAMERA/MAGIC KEYBOARD BACKLIT/TOUCH ID/BLUETOOTH 5.3/WI-FI 6/MACOS)</h3>
+  <p>Rp 16.300.000</p>
+</div>
+
+<div class="product-card" data-category="laptop" data-brand="apple">
+  <img alt="MACBOOK AIR 13 M3" src="foto/apple3.jpg"/>
+  <h3>MACBOOK AIR 13 MRXP3ID (APPLE M3 8C/8GB/512GB SSD/13 INCH/MAGIC KEYBOARD BACKLIT/TOUCH ID/CAMERA
+  /BLUETOOTH 5.3/WI-FI 6E/MACOS/RESMI IBOX)</h3>
+  <p>Rp 20.800.000</p>
+</div>
+
+<!-- Apple MacBook Pro Series -->
+<div class="product-card" data-category="laptop" data-brand="apple">
+  <img alt="MACBOOK PRO 14 M3" src="foto/apple4.jpg"/>
+  <h3>APPLE MACBOOK PRO 14 MTL73ID/A (APPLE M3 CHIP/8GB/512GB SSD/14.2 INCH LIQUID RETINA XDR DISPLAY/CAMERA/BACKLIT MAGIC KEYBOARD
+    /TOUCH ID/WI-FI 6E
+  /BLUETOOTH 5.3/MACOS/RESMI IBOX)</h3>
+  <p>Rp 26.000.000</p>
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+<script>
+  let currentPage = parseInt(localStorage.getItem("page")) || 1;
+
+  function showPage(pageNumber) {
+    const cards = document.querySelectorAll(".product-card");
+    const itemsPerPage = 30; // misalnya 30 produk per halaman
+    const totalPages = Math.ceil(cards.length / itemsPerPage);
+
+    // simpan ke localStorage
+    localStorage.setItem("page", pageNumber);
+
+    cards.forEach((card, index) => {
+      card.style.display =
+        index >= (pageNumber - 1) * itemsPerPage && index < pageNumber * itemsPerPage
+          ? "block"
+          : "none";
+    });
+
+    // update tombol halaman
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      btn.style.margin = "5px";
+      btn.style.borderRadius = "10px";
+      btn.style.padding = "5px 10px";
+      if (i === pageNumber) {
+        btn.style.background = "#007bff";
+        btn.style.color = "#fff";
+      }
+      btn.addEventListener("click", () => showPage(i));
+      pagination.appendChild(btn);
+    }
+  }
+
+  // panggil saat load
+  window.addEventListener("DOMContentLoaded", () => {
+    showPage(currentPage);
+  });
+</script>
+
+<script>
+    const searchInput = document.getElementById("searchInput");
+const sortSelect = document.getElementById("sortPrice");
+const productGrid = document.getElementById("productGrid");
+const pagination = document.getElementById("pagination");
+const categoryFilter = document.getElementById("categoryFilter");
+const brandFilter = document.getElementById("brandFilter");
+
+const originalCards = Array.from(document.querySelectorAll(".product-card"));
+let currentPage = 1;
+const itemsPerPage = 30;
+
+function cleanPrice(priceText) {
+  return parseInt(priceText.replace(/[^0-9]/g, ""), 10);
+}
+
+function paginate(items, page = 1, perPage = 30) {
+  const start = (page - 1) * perPage;
+  return items.slice(start, start + perPage);
+}
+
+function renderPagination(totalItems, perPage, pageNow) {
+
+  const pageCount = Math.ceil(totalItems / perPage);
+  pagination.innerHTML = "";
+  for (let i = 1; i <= pageCount; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = i;
+btn.style.margin = "0 5px";
+btn.style.padding = "8px 12px";
+btn.style.border = i === currentPage ? "2px solid #0070f3" : "1px solid #ccc";
+btn.style.backgroundColor = i === currentPage ? "#e0f0ff" : "#fff";
+btn.style.color = "#000"; // pastikan teksnya terlihat
+btn.style.cursor = "pointer";
+btn.style.borderRadius = "12px";
+btn.style.fontWeight = "bold";
+    btn.onclick = () => {
+      currentPage = i;
+      filterAndSort();
+    };
+    pagination.appendChild(btn);
+  }
+}
+
+function renderCards(cards) {
+  productGrid.innerHTML = "";
+  paginate(cards, currentPage, itemsPerPage).forEach(card => productGrid.appendChild(card));
+  animateCards();
+  renderPagination(cards.length, itemsPerPage, currentPage);
+}
+
+function filterAndSort() {
+  const selectedBrand = brandFilter.value;
+  const keyword = searchInput.value.toLowerCase();
+  const selectedCategory = categoryFilter.value;
+
+  let filtered = originalCards.filter(card => {
+    const matchesKeyword = card.textContent.toLowerCase().includes(keyword);
+    const matchesCategory = selectedCategory === "all" || card.dataset.category === selectedCategory;
+    const matchesBrand = selectedBrand === "all" || (card.dataset.brand && card.dataset.brand.toLowerCase() === selectedBrand);
+    return matchesKeyword && matchesCategory && matchesBrand;
+  });
+
+  const sort = sortSelect.value;
+  if (sort === "asc") {
+    filtered.sort((a, b) => cleanPrice(a.querySelector("p").textContent) - cleanPrice(b.querySelector("p").textContent));
+  } else if (sort === "desc") {
+    filtered.sort((a, b) => cleanPrice(b.querySelector("p").textContent) - cleanPrice(a.querySelector("p").textContent));
+  }
+
+  renderCards(filtered);
+}
+
+function animateCards() {
+  const cards = document.querySelectorAll(".product-card");
+  cards.forEach((card, index) => {
+    card.style.opacity = 0;
+    card.style.transform = "scale(0.8)";
+    setTimeout(() => {
+      card.style.transition = "all 0.5s ease";
+      card.style.opacity = 1;
+      card.style.transform = "scale(1)";
+    }, index * 50);
+  });
+}
+
+searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  filterAndSort();
+});
+sortSelect.addEventListener("change", () => {
+  currentPage = 1;
+  filterAndSort();
+});
+categoryFilter.addEventListener("change", () => {
+  currentPage = 1;
+  filterAndSort();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  currentPage = 1; // langsung buka halaman ke-1
+  filterAndSort();
+});
+
+
+  
+
+</script>
+
+<script>
+  let currentPage = parseInt(localStorage.getItem("page")) || 1;
+
+  function showPage(pageNumber) {
+    const cards = document.querySelectorAll(".product-card");
+    const itemsPerPage = 30;
+    const totalPages = Math.ceil(cards.length / itemsPerPage);
+
+    localStorage.setItem("page", pageNumber);
+
+    cards.forEach((card, index) => {
+      card.style.display =
+        index >= (pageNumber - 1) * itemsPerPage && index < pageNumber * itemsPerPage
+          ? "block"
+          : "none";
+    });
+
+    const pagination = document.getElementById("pagination");
+    pagination.innerHTML = "";
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.textContent = i;
+      btn.style.margin = "5px";
+      btn.style.borderRadius = "12px";
+      btn.style.padding = "5px 10px";
+      btn.style.border = "1px solid #ccc";
+      btn.style.cursor = "pointer";
+
+      if (i === pageNumber) {
+        btn.style.background = "#007bff";
+        btn.style.color = "#fff";
+      }
+
+      btn.addEventListener("click", () => showPage(i));
+      pagination.appendChild(btn);
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    showPage(currentPage);
+  });
+
+  const scrollBtn = document.getElementById("scrollTopBtn");
+  window.onscroll = function () {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+      scrollBtn.style.display = "block";
+    } else {
+      scrollBtn.style.display = "none";
+    }
+  };
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+
+
+<footer style="text-align: center; padding: 20px; background-color: #fff; box-shadow: 0 -2px 5px rgba(0,0,0,0.1); margin-top: 30px;">
+<p><strong>Alamat Toko:</strong><br/>
+    Simpang Empat Banua Lima, Palampitan Hilir, Kec. Amuntai Tengah,<br/>
+    Kabupaten Hulu Sungai Utara, Kalimantan Selatan 71414</p>
+<p><strong>Catatan:</strong><br/>
+    Untuk harga laptop masih bisa nego<br/></p>
+<div style="margin-top: 15px;">
+<iframe allowfullscreen="" height="200" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3327.058222625115!2d115.2419308!3d-2.4263323!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de538dc66e364b7%3A0xa063f8a8845fe061!2sArtha%20Sejahtera%20Komputindo!5e1!3m2!1sid!2sid!4v1748244750201!5m2!1sid!2sid" style="border:0; border-radius: 8px;" width="300">
+</iframe>
+
+<!-- Tombol Scroll ke Atas -->
+<button onclick="scrollToTop()" id="scrollTopBtn" title="Kembali ke atas">↑</button>
+
+</div>
+</footer>
+</body>
+</html>
