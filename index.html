@@ -184,6 +184,7 @@
 </div>
 <div class="content">
 <div class="controls">
+ <div id="note" style="color: red; font-weight: bold; margin-bottom: 15px;"></div>
 <input id="searchInput" placeholder="Cari barang..." style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 16px;" type="text"/>
 <select id="categoryFilter">
 <option value="all">Semua Kategori</option>
@@ -1720,6 +1721,65 @@ document.addEventListener("DOMContentLoaded", () => {
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const categoryFilter = document.getElementById('categoryFilter');
+  const brandFilter = document.getElementById('brandFilter');
+  const sortPrice = document.getElementById('sortPrice');
+  const searchInput = document.getElementById('searchInput');
+  const productGrid = document.getElementById('productGrid');
+  const note = document.getElementById('note');
+
+  function parsePrice(priceStr) {
+    return parseInt(priceStr.replace(/[^0-9]/g, ''), 10);
+  }
+
+  function filterAndSortProducts() {
+    const selectedCategory = categoryFilter.value;
+    const selectedBrand = brandFilter.value;
+    const sortValue = sortPrice.value;
+    const searchKeyword = searchInput.value.toLowerCase();
+
+    const allProducts = Array.from(productGrid.querySelectorAll('.product-card'));
+    let filteredProducts = allProducts.filter(product => {
+      const category = product.dataset.category;
+      const brand = product.dataset.brand;
+      const name = product.querySelector('h3').innerText.toLowerCase();
+
+      const matchCategory = selectedCategory === 'all' || category === selectedCategory;
+      const matchBrand = selectedBrand === 'all' || brand === selectedBrand;
+      const matchName = name.includes(searchKeyword);
+
+      return matchCategory && matchBrand && matchName;
+    });
+
+    // tampilkan catatan jika hanya brand dipilih
+    if (selectedCategory === 'all' && selectedBrand !== 'all') {
+      note.textContent = 'Catatan: Silakan tambahkan kategori.';
+    } else {
+      note.textContent = '';
+    }
+
+    // sorting
+    if (sortValue === 'asc') {
+      filteredProducts.sort((a, b) => parsePrice(a.querySelector('p').innerText) - parsePrice(b.querySelector('p').innerText));
+    } else if (sortValue === 'desc') {
+      filteredProducts.sort((a, b) => parsePrice(b.querySelector('p').innerText) - parsePrice(a.querySelector('p').innerText));
+    }
+
+    // tampilkan
+    productGrid.innerHTML = '';
+    filteredProducts.forEach(product => productGrid.appendChild(product));
+  }
+
+  categoryFilter.addEventListener('change', filterAndSortProducts);
+  brandFilter.addEventListener('change', filterAndSortProducts);
+  sortPrice.addEventListener('change', filterAndSortProducts);
+  searchInput.addEventListener('input', filterAndSortProducts);
+
+  filterAndSortProducts(); // Jalankan awal
+});
 </script>
 
 
