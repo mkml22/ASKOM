@@ -1556,47 +1556,6 @@
 
 </div>
 </div>
-<script>
-  let currentPage = parseInt(localStorage.getItem("page")) || 1;
-
-  function showPage(pageNumber) {
-    const cards = document.querySelectorAll(".product-card");
-    const itemsPerPage = 30; // misalnya 30 produk per halaman
-    const totalPages = Math.ceil(cards.length / itemsPerPage);
-
-    // simpan ke localStorage
-    localStorage.setItem("page", pageNumber);
-
-    cards.forEach((card, index) => {
-      card.style.display =
-        index >= (pageNumber - 1) * itemsPerPage && index < pageNumber * itemsPerPage
-          ? "block"
-          : "none";
-    });
-
-    // update tombol halaman
-    const pagination = document.getElementById("pagination");
-    pagination.innerHTML = "";
-    for (let i = 1; i <= totalPages; i++) {
-      const btn = document.createElement("button");
-      btn.textContent = i;
-      btn.style.margin = "5px";
-      btn.style.borderRadius = "10px";
-      btn.style.padding = "5px 10px";
-      if (i === pageNumber) {
-        btn.style.background = "#007bff";
-        btn.style.color = "#fff";
-      }
-      btn.addEventListener("click", () => showPage(i));
-      pagination.appendChild(btn);
-    }
-  }
-
-  // panggil saat load
-  window.addEventListener("DOMContentLoaded", () => {
-    showPage(currentPage);
-  });
-</script>
 
 <script>
     const searchInput = document.getElementById("searchInput");
