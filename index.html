@@ -1,80 +1,27 @@
 <!DOCTYPE html>
-
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Askom</title>
-<meta name="description" content="Toko laptop, printer, dan aksesoris resmi di Hulu Sungai Utara. Artha Sejahtera Komputindo menyediakan produk berkualitas dengan harga bersaing.">
-<style>
- 
-#scrollTopBtn {
-  position: fixed;
-  bottom: 40px;
-  right: 30px;
-  z-index: 99;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  padding: 12px 16px;
-  font-size: 20px;
-  cursor: pointer;
-  display: none;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Askom</title>
+  <meta name="description" content="Toko laptop, printer, dan aksesoris resmi di Hulu Sungai Utara. Artha Sejahtera Komputindo menyediakan produk berkualitas dengan harga bersaing.">
 
-#scrollTopBtn:hover {
-  background-color: #0056b3;
-}
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-
-    /* Efek hover lebih menarik pada product card */
-.product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
-}
-
-.product-card:hover {
-  transform: scale(1.05) rotate(0.5deg);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  background-color: #f0f8ff; /* warna latar belakang lembut saat hover */
-}
-
-/* Efek getar saat diklik */
-.product-card:active {
-  animation: shake 0.3s;
-}
-
-@keyframes shake {
-  0% { transform: translateX(0px); }
-  25% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  75% { transform: translateX(-2px); }
-  100% { transform: translateX(0px); }
-}
-
-    .product-card {
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-    }
-
-    .product-card:hover {
-      transform: scale(1.03);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-
+  <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
       display: flex;
+      flex-direction: column;
       min-height: 100vh;
       background-color: #f3f4f6;
-      flex-direction: column;
     }
 
     .sidebar {
@@ -96,20 +43,25 @@
       border-radius: 50%;
     }
 
-    .sidebar h2 {
-      font-size: 20px;
+    .glow-text {
+      font-size: 24px;
       font-weight: bold;
-      color: #333;
+      background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbowGlow 6s ease infinite;
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+    }
+
+    @keyframes rainbowGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .content {
       padding: 30px;
-    }
-
-    .content h2 {
-      font-size: 24px;
-      margin-bottom: 20px;
-      color: #222;
     }
 
     .controls {
@@ -119,11 +71,18 @@
       flex-wrap: wrap;
     }
 
-    .controls select {
+    .controls select, .controls input {
       padding: 10px;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 16px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .controls select:focus, .controls input:focus {
+      border-color: #007bff;
+      outline: none;
     }
 
     .product-grid {
@@ -133,17 +92,49 @@
     }
 
     .product-card {
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 15px;
+      background: linear-gradient(135deg, #ffffff, #f9f9f9);
+      border: 1px solid #eee;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
       text-align: center;
+      padding: 15px;
+      animation: fadeInUp 0.5s ease both;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      background-color: #eef6ff;
+    }
+
+    .product-card:active {
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0px); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-2px); }
+      100% { transform: translateX(0px); }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .product-card img {
       width: 100%;
       border-radius: 8px;
       margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
     }
 
     .product-card h3 {
@@ -156,32 +147,41 @@
       color: #0070f3;
       font-weight: bold;
     }
- 
-    .glow-text {
-  font-size: 24px;
-  font-weight: bold;
-  background: linear-gradient(45deg, red, orange, yellow, green, cyan, blue, violet);
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: rainbowGlow 6s ease infinite;
-  text-shadow: 0 0 5px #fff, 0 0 10px #fff;
-}
 
-@keyframes rainbowGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 40px;
+      right: 30px;
+      z-index: 99;
+      background: linear-gradient(45deg, #007bff, #00c6ff);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 14px 18px;
+      font-size: 22px;
+      cursor: pointer;
+      display: none;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
 
+    #scrollTopBtn:hover {
+      background-color: #0056b3;
+    }
 
+    footer {
+      background: #111;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      margin-top: auto;
+    }
   </style>
 </head>
 <body>
-<div class="sidebar">
-<img alt="Logo Toko" src="foto/ARTHA22.jpg"/>
-<h2 class="glow-text">Artha_Sejahtera_Komputindo</h2>
-</div>
+  <div class="sidebar">
+    <img alt="Logo Toko" src="foto/ARTHA22.jpg" />
+    <h2 class="glow-text">Artha_Sejahtera_Komputindo</h2>
+  </div>
 <div class="content">
 <div class="controls">
 <div id="note" style="color: red; font-weight: bold; margin-bottom: 15px;"></div>
@@ -494,13 +494,6 @@
   <p>Rp 5.500.000</p>
 </div>
 
- 
-<div class="product-card" data-category="laptop" data-brand="acer">
-  <img alt="AG14-31P-34GM" src="foto/acerg1.jpg"/>
-  <h3>AG14-31P-34GM (INTEL CORE I3-N305/8GB LPDDR5/512GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA TN/CAMERA/WI-FI 6/BLUETOOTH 5.0/WIN11+OHS/RESMI)</h3>
-  <p>Rp 6.000.000</p>
-</div>
-
 <div class="product-card" data-category="laptop" data-brand="acer">
   <img alt="AL1 14-14M-RBID/RSID" src="foto/acer7.jpg"/>
   <h3>AL1 14-14M-RBID/RSID (INTEL CORE I3-1215U/8GB DDR4/256GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 5/BLUETOOTH 5.1/WIN11+OHS 2021/RESMI)</h3>
@@ -535,7 +528,7 @@
 <div class="product-card" data-category="laptop" data-brand="acer">
   <img alt="AL14-52M-59TF" src="foto/acer12.jpg"/>
   <h3>AL14-52M-59TF (INTEL CORE I5-1334U/16GB DDR5/512GB PCIE NVME SSD/INTEL UHD GRAPHICS/14 INCH WUXGA IPS/CAMERA/WI-FI 6/BLUETOOTH 5.1/WIN11+OHS/RESMI)</h3>
-  <p>Rp 8.700.000</p>
+  <p>Rp 8.400.000</p>
 </div>
 
 <div class="product-card" data-category="laptop" data-brand="acer">
@@ -1660,7 +1653,7 @@
         <h3>(Epson L5290)
          Print & Copy | Scan | Wi-fi
         </h3>
-        <p>Rp 4.400.000</p>
+        <p>Rp 5.600.000</p>
       </div>
         <div class="product-card" data-category="printer" data-brand="canon">
         <img alt="Sneakers" src="foto/p4.jpg"/>
@@ -1715,7 +1708,7 @@
         <p>Rp 100.000</p>
       </div>
          <div class="product-card" data-category="aksesoris">
-        <img alt="Sneakers" src="foto/san.jpg"/>
+        <img alt="Sneakers" src="foto/Sandisk.jpg"/>
         <h3>(Flasdisk Sandisk 32 GB)
         </h3>
         <p>Rp 65.000</p>
@@ -1968,24 +1961,30 @@ document.addEventListener('DOMContentLoaded', function () {
     Kabupaten Hulu Sungai Utara, Kalimantan Selatan 71414</p>
 <p><strong>Catatan:</strong><br/>
     Untuk harga laptop masih bisa nego<br/></p>
+
+    
 <div style="margin-top: 15px;">
 <iframe allowfullscreen="" height="200" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3327.058222625115!2d115.2419308!3d-2.4263323!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de538dc66e364b7%3A0xa063f8a8845fe061!2sArtha%20Sejahtera%20Komputindo!5e1!3m2!1sid!2sid!4v1748244750201!5m2!1sid!2sid" style="border:0; border-radius: 8px;" width="300">
 </iframe>
- 
+
+
 <p><strong>Ikuti media sosial kami untuk info lebih lanjut</strong></p>
 <div style="text-align: center; margin-top: 40px; padding-bottom: 30px;">
   <a href="https://www.instagram.com/artha_sejahtera" target="_blank" style="margin: 0 10px;">
-    <img src="foto/ig.jpg" alt="Instagram" width="32" height="32"/>
+    <img src="foto/ig.png" alt="Instagram" width="32" height="32"/>
   </a>
   <a href="https://wa.me/6281254140777" target="_blank" style="margin: 0 10px;">
     <img src="foto/wa.png" alt="WhatsApp" width="32" height="32"/>
   </a>
+
 
 <!-- Tombol Scroll ke Atas -->
 <button onclick="scrollToTop()" id="scrollTopBtn" title="Kembali ke atas">↑</button>
 
 </div>
 </footer>
-
+<footer>
+    <p>&copy; 2025 Artha Sejahtera Komputindo. All rights reserved.</p>
+  </footer>
 </body>
 </html>
