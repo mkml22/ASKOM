@@ -2032,9 +2032,9 @@ document.addEventListener('DOMContentLoaded', function () {
 <button onclick="scrollToTop()" id="scrollTopBtn" title="Kembali ke atas">↑</button>
 <div class="carousel-container-portrait">
   <div class="carousel-slide-portrait">
-    <img src="foto/toko1.jpg" alt="Toko 1" />
-    <img src="foto/toko2.jpg" alt="Toko 2" />
-    <img src="foto/toko3.jpg" alt="Toko 3" />
+    <img src="foto/toko1.jpg" alt="Toko 1" onmousedown="showNote()" ontouchstart="showNote()" />
+    <img src="foto/toko2.jpg" alt="Toko 2" onmousedown="showNote()" ontouchstart="showNote()"/>
+    <img src="foto/toko3.jpg" alt="Toko 3" onmousedown="showNote()" ontouchstart="showNote()" />
   </div>
 </div>
 
@@ -2057,6 +2057,16 @@ document.addEventListener('DOMContentLoaded', function () {
   function closeModal() {
     document.getElementById('stockModal').style.display = 'none';
     document.getElementById('modalOverlay').style.display = 'none';
+  }
+</script>
+<script>
+  let noteTimeout;
+
+  function showNote() {
+    clearTimeout(noteTimeout);
+    noteTimeout = setTimeout(() => {
+      alert("📌 Tekan lama untuk menampilkan gambar secara penuh");
+    }, 500); // hanya tampil jika ditahan minimal 0.5 detik
   }
 </script>
 
