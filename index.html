@@ -175,15 +175,40 @@
       text-align: center;
       margin-top: auto;
     }
+.carousel-container-portrait {
+  width: 250px;
+  aspect-ratio: 9 / 16; /* Portrait */
+  overflow: hidden;
+  margin: 30px auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  position: relative;
+}
 
-    .carousel-slide-portrait img {
+.carousel-slide-portrait {
+  display: flex;
+  width: 300%; /* untuk 3 gambar */
+  height: 100%;
+  animation: slidePortrait 9s infinite;
+}
+
+.carousel-slide-portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right center; /* 🔍 Fokus ke sisi kanan gambar */
   flex-shrink: 0;
   display: block;
 }
+
+@keyframes slidePortrait {
+  0%   { transform: translateX(0%); }
+  33%  { transform: translateX(0%); }
+  36%  { transform: translateX(-100%); }
+  66%  { transform: translateX(-100%); }
+  69%  { transform: translateX(-200%); }
+  100% { transform: translateX(-200%); }
+}
+
 
   </style>
 </head>
@@ -2005,9 +2030,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- Tombol Scroll ke Atas -->
 <button onclick="scrollToTop()" id="scrollTopBtn" title="Kembali ke atas">↑</button>
-<div class="carousel-container">
-  <div class="carousel-slide">
+<div class="carousel-container-portrait">
+  <div class="carousel-slide-portrait">
     <img src="foto/toko1.jpg" alt="Toko 1" />
+    <img src="foto/toko2.jpg" alt="Toko 2" />
+    <img src="foto/toko3.jpg" alt="Toko 3" />
   </div>
 </div>
 
